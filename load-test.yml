@@ -1,0 +1,28 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 50
+      name: "Ramp-up warm phase"
+    - duration: 120
+      arrivalRate: 50
+      rampTo: 200
+      name: "Sustained high load phase (Peak simulated traffic)"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Customer browsing catalog and checking health"
+    flow:
+      - get:
+          url: "/api/health"
+      - get:
+          url: "/api/products"
+      - think: 2
+      - post:
+          url: "/api/users/login"
+          json:
+            email: "loadtest@example.com"
+            password: "wrongpassword123"

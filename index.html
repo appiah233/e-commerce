@@ -1,251 +1,235 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EmyAfroBeads | Handcrafted Ghanaian Beads &amp; Jewelry</title>
-    <meta
-      name="description"
-      content="EmyAfroBeads offers handcrafted Ghanaian beads inspired by African traditions. Shop bracelets, necklaces, waist beads, and anklets with free worldwide shipping."
-    />
-    <meta name="keywords" content="Ghanaian beads, African jewelry, waist beads, handcrafted bracelets, recycled glass beads, Accra Ghana" />
-    <meta property="og:title" content="EmyAfroBeads | Handcrafted Ghanaian Beads" />
-    <meta property="og:description" content="Small-batch glass and clay beads handcrafted in Ghana. Each set is hand-strung and finished in rich earth tones." />
-    <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://js.paystack.co" />
-    <link rel="dns-prefetch" href="https://js.paystack.co" />
-    <link rel="preconnect" href="https://unpkg.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="ambient"></div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EmyAfroBeads | Handcrafted Ghanaian Beads &amp; Jewelry</title>
+  <meta name="description" content="EmyAfroBeads offers handcrafted Ghanaian beads inspired by African traditions. Shop bracelets, necklaces, waist beads, and anklets with free worldwide shipping." />
+  <meta name="keywords" content="Ghanaian beads, African jewelry, waist beads, handcrafted bracelets, recycled glass beads, Accra Ghana" />
+  <meta property="og:title" content="EmyAfroBeads | Handcrafted Ghanaian Beads" />
+  <meta property="og:description" content="Small-batch glass and clay beads handcrafted in Ghana. Each set is hand-strung and finished in rich earth tones." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://js.paystack.co" />
+  <link rel="dns-prefetch" href="https://js.paystack.co" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-    <!-- Announcement Bar -->
-    <div class="announce-bar">
-      <div class="announce-track">
-        <span>Free shipping over GHS 300</span>
-        <span>Handcrafted in Accra</span>
-        <span>Worldwide delivery</span>
-      </div>
+  <!-- Announce Bar -->
+  <div class="announce-bar">
+    <div class="announce-track">
+      <span>Free shipping on orders over GHS 300</span>
+      <span>Handcrafted in Accra, Ghana</span>
+      <span>Worldwide delivery in 3–5 days</span>
     </div>
+  </div>
 
-    <!-- Header -->
-    <header class="site-header">
-      <nav class="nav" id="mainNav">
-        <div class="brand">
-          <span class="brand-mark"></span>
-          <p class="brand-name">EmyAfroBeads</p>
-        </div>
-
-        <div class="nav-links">
-          <a href="#shop">Shop</a>
-          <a href="#story">Our Story</a>
-          <a href="#reviews">Reviews</a>
-          <a href="#custom">Custom</a>
-          <a href="#contact">Contact</a>
-        </div>
-
-        <div class="nav-actions">
-          <div class="search-wrapper">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-            <label>
-              <span class="sr-only">Search products</span>
-              <input id="searchInput" type="search" placeholder="Search beads..." autocomplete="off" />
-            </label>
-            <div id="searchDropdown" class="search-dropdown"></div>
-          </div>
-
-          <select id="currencySelect" class="currency-select" aria-label="Currency">
-            <option value="GHS">GHS ₵</option>
-            <option value="USD">USD $</option>
-            <option value="GBP">GBP £</option>
-            <option value="EUR">EUR €</option>
-          </select>
-
-          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
-            <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-            </svg>
-          </button>
-
-          <button id="userButton" class="user-btn" type="button" aria-label="User account">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span id="userBadge" class="user-badge" style="display:none;"></span>
-          </button>
-
-          <button id="cartButton" class="cart-button" type="button" aria-label="Open cart">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 6h15l-1.5 9h-12z"></path>
-              <path d="M6 6l-2-2"></path>
-              <path d="M9 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-            </svg>
-            <span class="cart-label">Cart</span>
-            <span id="cartCount" class="cart-count">0</span>
-          </button>
-
-          <button id="hamburgerBtn" class="hamburger" type="button" aria-label="Open menu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </nav>
-    </header>
-
-    <!-- Mobile Nav -->
-    <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
-    <nav id="mobileNav" class="mobile-nav">
-      <div class="mobile-nav-header">
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav" id="mainNav">
+      <div class="brand">
+        <div class="brand-mark"></div>
         <p class="brand-name">EmyAfroBeads</p>
-        <button id="mobileNavClose" class="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
       </div>
-      <div class="mobile-nav-links">
-        <a href="#shop">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shop All
-        </a>
-        <a href="#story">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
-          Our Story
-        </a>
-        <a href="#reviews">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-          Reviews
-        </a>
-        <a href="#custom">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          Custom Orders
-        </a>
-        <a href="#contact">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
-          Contact
-        </a>
+
+      <div class="nav-links">
+        <a href="#shop">Shop</a>
+        <a href="#story">Our Story</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#custom">Custom</a>
+        <a href="#contact">Contact</a>
       </div>
-      <div class="mobile-nav-footer">
-        <div class="footer-social">
-          <a href="https://instagram.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><path d="M17.5 6.5h.01"></path></svg>
-          </a>
-          <a href="https://tiktok.com/@emyafrobeads" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.17V11.8a4.84 4.84 0 01-3.58-1.53V6.69h3.58z"/></svg>
-          </a>
-          <a href="https://facebook.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-          </a>
+
+      <div class="nav-actions">
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <label>
+            <span class="sr-only">Search products</span>
+            <input id="searchInput" type="search" placeholder="Search beads..." autocomplete="off" />
+          </label>
+          <div id="searchDropdown" class="search-dropdown"></div>
         </div>
+
+        <select id="currencySelect" class="currency-select" aria-label="Currency">
+          <option value="GHS">GHS ₵</option>
+          <option value="USD">USD $</option>
+          <option value="GBP">GBP £</option>
+          <option value="EUR">EUR €</option>
+        </select>
+
+        <button id="themeToggle" class="theme-toggle icon-btn" type="button" aria-label="Toggle dark mode">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+        </button>
+
+        <button id="userButton" class="user-btn" type="button" aria-label="User account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span id="userBadge" class="user-badge" style="display:none;"></span>
+        </button>
+
+        <button id="cartButton" class="cart-button" type="button" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 6h15l-1.5 9h-12z"></path>
+            <path d="M6 6l-2-2"></path>
+            <path d="M9 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+          </svg>
+          <span class="cart-label">Bag</span>
+          <span id="cartCount" class="cart-count">0</span>
+        </button>
+
+        <button id="hamburgerBtn" class="hamburger" type="button" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </nav>
+  </header>
 
-    <main>
-      <!-- HERO -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-content">
-          <p class="eyebrow">Heritage Luxe Collection</p>
-          <h1 id="hero-title">Ghanaian beadwork for modern ritual.</h1>
-          <p class="hero-copy">
-            Small-batch glass and clay beads handcrafted in Accra, Ghana. Each set is hand-strung,
-            layered for daily wear, and finished in rich earth tones for timeless styling.
-          </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#shop">Shop signature beads</a>
-            <a class="btn ghost" href="#custom">Request custom order</a>
+  <!-- Mobile Nav -->
+  <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
+  <nav id="mobileNav" class="mobile-nav">
+    <div class="mobile-nav-header">
+      <p class="brand-name">EmyAfroBeads</p>
+      <button id="mobileNavClose" class="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#shop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 01-8 0"></path></svg>
+        Shop All
+      </a>
+      <a href="#story">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+        Our Story
+      </a>
+      <a href="#reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        Reviews
+      </a>
+      <a href="#custom">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        Custom Orders
+      </a>
+      <a href="#contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
+        Contact
+      </a>
+    </div>
+    <div class="mobile-nav-footer">
+      <div class="footer-social">
+        <a href="https://instagram.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><path d="M17.5 6.5h.01"></path></svg>
+        </a>
+        <a href="https://tiktok.com/@emyafrobeads" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.17V11.8a4.84 4.84 0 01-3.58-1.53V6.69h3.58z"/></svg>
+        </a>
+        <a href="https://facebook.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">Heritage Luxe Collection</p>
+        <h1 id="hero-title">Ghanaian beadwork for modern ritual.</h1>
+        <p class="hero-copy">
+          Small-batch glass and clay beads handcrafted in Accra. Each set is hand-strung,
+          layered for daily wear, and finished in rich earth tones for timeless styling.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#shop">Shop signature beads</a>
+          <a class="btn ghost" href="#custom">Request custom order</a>
+        </div>
+        <div class="hero-note">
+          <span class="pill">Free worldwide shipping</span>
+          <span>Delivery in 3–5 business days</span>
+        </div>
+        <div class="hero-metrics">
+          <div>
+            <p class="metric">520+</p>
+            <p class="metric-label">Orders fulfilled</p>
           </div>
-          <div class="hero-note">
-            <span class="pill">Free worldwide shipping</span>
-            <span>Delivery in 3-5 business days</span>
+          <div>
+            <p class="metric">4.9</p>
+            <p class="metric-label">Client rating</p>
           </div>
-          <div class="hero-metrics">
-            <div>
-              <p class="metric">520+</p>
-              <p class="metric-label">Orders fulfilled</p>
-            </div>
-            <div>
-              <p class="metric">4.9</p>
-              <p class="metric-label">Client rating</p>
-            </div>
-            <div>
-              <p class="metric">Accra</p>
-              <p class="metric-label">Made in Ghana</p>
-            </div>
+          <div>
+            <p class="metric">Accra</p>
+            <p class="metric-label">Made in Ghana</p>
           </div>
         </div>
-        <div class="hero-card">
-          <div class="hero-card-top">
-            <span class="pill">Signature set</span>
-            <span class="price" data-price="180">GHS 180</span>
+      </div>
+
+      <div class="hero-visual-side">
+        <img class="hero-img-main" src="images/waist_beads.png" alt="Woman wearing waist beads" loading="eager" decoding="async" fetchpriority="high" />
+        <div class="hero-card-float">
+          <img class="hero-card-img" src="images/necklace_beads.png" alt="Necklace beads" />
+          <div class="hero-card-info">
+            <p class="hero-card-name">Sankofa Necklace</p>
+            <p class="hero-card-price" data-price="220">GHS 220</p>
           </div>
-          <div class="hero-visual">
-            <img class="art-image" src="images/waist_beads.png" alt="Woman wearing waist beads" loading="eager" decoding="async" fetchpriority="high" />
-          </div>
-          <h3>African glass bracelet set</h3>
-          <p>Recycled glass beads in cocoa, clay, and gold tones.</p>
-          <button class="btn primary" type="button" data-quick-add="b1">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
-              <path d="M3 6h18"></path>
-              <path d="M16 10a4 4 0 01-8 0"></path>
-            </svg>
-            Quick add to bag
+          <button class="hero-card-add" type="button" data-quick-add="n1" aria-label="Quick add to bag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
           </button>
-          <div class="hero-card-bottom">
-            <span>Free worldwide shipping</span>
-            <span>3-5 day delivery</span>
-          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- SHOP -->
-      <section id="shop" class="shop reveal" aria-labelledby="shop-title">
-        <div class="section-header">
+    <div class="section-divider"></div>
+
+    <!-- SHOP -->
+    <section id="shop" class="reveal" aria-labelledby="shop-title">
+      <div class="section-wrap">
+        <div class="section-header-row">
           <div>
             <p class="eyebrow">Shop the atelier</p>
-            <h2 id="shop-title">Signature beads for modern rituals</h2>
+            <h2 id="shop-title" class="section-title">Signature beads for modern rituals</h2>
           </div>
-          <div class="filters">
-            <div class="filter-buttons" role="tablist" aria-label="Product categories">
-              <button class="filter-button is-active" data-filter="All" type="button">All</button>
-              <button class="filter-button" data-filter="Bracelets" type="button">Bracelets</button>
-              <button class="filter-button" data-filter="Necklaces" type="button">Necklaces</button>
-              <button class="filter-button" data-filter="Waist Beads" type="button">Waist Beads</button>
-              <button class="filter-button" data-filter="Anklets" type="button">Anklets</button>
-            </div>
-            <label class="sort">
-              <span class="sr-only">Sort products</span>
-              <select id="sortSelect">
-                <option value="featured">Featured</option>
-                <option value="low">Price: Low → High</option>
-                <option value="high">Price: High → Low</option>
-                <option value="rating">Top Rated</option>
-              </select>
-            </label>
+        </div>
+        <div class="filters-row">
+          <div class="filter-buttons" role="tablist" aria-label="Product categories">
+            <button class="filter-button is-active" data-filter="All" type="button">All</button>
+            <button class="filter-button" data-filter="Bracelets" type="button">Bracelets</button>
+            <button class="filter-button" data-filter="Necklaces" type="button">Necklaces</button>
+            <button class="filter-button" data-filter="Waist Beads" type="button">Waist Beads</button>
+            <button class="filter-button" data-filter="Anklets" type="button">Anklets</button>
           </div>
+          <label class="sort-label">
+            <span class="sr-only">Sort products</span>
+            <select id="sortSelect">
+              <option value="featured">Featured</option>
+              <option value="low">Price: Low → High</option>
+              <option value="high">Price: High → Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </label>
         </div>
         <div id="productGrid" class="product-grid" aria-live="polite"></div>
-      </section>
+      </div>
+    </section>
 
-      <!-- OUR STORY -->
-      <section id="story" class="story reveal" aria-labelledby="story-title">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Our heritage</p>
-            <h2 id="story-title">The art of Ghanaian beadwork</h2>
-          </div>
-        </div>
+    <div class="section-divider"></div>
+
+    <!-- OUR STORY -->
+    <section id="story" class="reveal" aria-labelledby="story-title">
+      <div class="section-wrap">
+        <p class="eyebrow">Our heritage</p>
+        <h2 id="story-title" class="section-title" style="margin-bottom:3rem;">The art of Ghanaian beadwork</h2>
         <div class="story-grid">
-          <div class="story-image">
-            <img src="images/waist_beads.png" alt="Woman wearing waist beads" loading="lazy" />
+          <div class="story-img">
+            <img src="images/necklace_beads.png" alt="Ghanaian handcrafted necklace beads" loading="lazy" />
           </div>
-          <div class="story-content">
+          <div class="story-body">
             <h3>From the heart of Accra to your doorstep</h3>
             <p>
               EmyAfroBeads was born from a passion for preserving the ancient art of Ghanaian beadwork.
@@ -260,16 +244,7 @@
             <div class="story-features">
               <div class="story-feature">
                 <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 2v4"></path>
-                    <path d="M6.38 6.38l2.83 2.83"></path>
-                    <path d="M3 12h4"></path>
-                    <path d="M17.62 6.38l-2.83 2.83"></path>
-                    <path d="M12 18v4"></path>
-                    <path d="M17.62 17.62l-2.83-2.83"></path>
-                    <path d="M21 12h-4"></path>
-                    <path d="M6.38 17.62l2.83-2.83"></path>
-                  </svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"></path><path d="M6.38 6.38l2.83 2.83"></path><path d="M3 12h4"></path><path d="M17.62 6.38l-2.83 2.83"></path><path d="M12 18v4"></path><path d="M17.62 17.62l-2.83-2.83"></path><path d="M21 12h-4"></path><path d="M6.38 17.62l2.83-2.83"></path></svg>
                 </div>
                 <div>
                   <strong>Recycled Materials</strong>
@@ -278,9 +253,7 @@
               </div>
               <div class="story-feature">
                 <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 21s-6.5-4.35-9-8c-1.5-1.95-1-4 1-5.5C6 5 8.5 5 12 9c3.5-4 6-4 8-1.5 2 1.5 2.5 3.55 1 5.5-2.5 3.65-9 8-9 8Z"></path>
-                  </svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-4.35-9-8c-1.5-1.95-1-4 1-5.5C6 5 8.5 5 12 9c3.5-4 6-4 8-1.5 2 1.5 2.5 3.55 1 5.5-2.5 3.65-9 8-9 8Z"></path></svg>
                 </div>
                 <div>
                   <strong>Hand-Strung</strong>
@@ -289,13 +262,7 @@
               </div>
               <div class="story-feature">
                 <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M3 12h18" />
-                    <path d="M12 3a15.3 15.3 0 0 1 0 18" />
-                    <path d="M8 4.5l3 7.5" />
-                    <path d="M16 4.5l-3 7.5" />
-                  </svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a15.3 15.3 0 0 1 0 18" /></svg>
                 </div>
                 <div>
                   <strong>Fair Trade</strong>
@@ -304,11 +271,7 @@
               </div>
               <div class="story-feature">
                 <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 7h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />
-                    <path d="M16 3h-8v4" />
-                    <path d="M7 11h10" />
-                  </svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" /><path d="M16 3h-8v4" /></svg>
                 </div>
                 <div>
                   <strong>Free Shipping</strong>
@@ -318,71 +281,42 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- INSTAGRAM GALLERY -->
-      <section id="gallery" class="gallery reveal" aria-labelledby="gallery-title">
-        <div class="section-header">
+    <div class="section-divider"></div>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="reveal" aria-labelledby="gallery-title">
+      <div class="section-wrap">
+        <div class="section-header-row">
           <div>
             <p class="eyebrow">From the studio</p>
-            <h2 id="gallery-title">Styled waist bead looks</h2>
+            <h2 id="gallery-title" class="section-title">Styled waist bead looks</h2>
           </div>
-          <a class="link-muted" href="https://www.instagram.com/adyscreation/" target="_blank" rel="noopener">View more</a>
+          <a class="link-muted" href="https://www.instagram.com/adyscreation/" target="_blank" rel="noopener">View on Instagram</a>
         </div>
         <div class="gallery-grid">
-          <a href="#gallery" target="_blank" rel="noopener">
-            <img src="images/waist_beads.png" alt="Woman wearing waist beads" loading="lazy" />
-          </a>
-          <a href="#gallery" target="_blank" rel="noopener">
-            <img src="images/waist_beads.png" alt="Woman wearing waist beads" loading="lazy" />
-          </a>
-          <a href="#gallery" target="_blank" rel="noopener">
-            <img src="images/waist_beads.png" alt="Woman wearing waist beads" loading="lazy" />
-          </a>
+          <a href="#gallery" rel="noopener"><img src="images/ig1.jpg" alt="Styled waist beads look" loading="lazy" /></a>
+          <a href="#gallery" rel="noopener"><img src="images/ig2.jpg" alt="Styled waist beads look" loading="lazy" /></a>
+          <a href="#gallery" rel="noopener"><img src="images/ig3.jpg" alt="Styled waist beads look" loading="lazy" /></a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- GENERATED LOOKBOOK -->
-      <section id="lookbook" class="gallery reveal" aria-labelledby="lookbook-title">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Styled visuals</p>
-            <h2 id="lookbook-title">Realistic generated looks</h2>
-            <p class="section-copy">AI-inspired waist bead styling previews with model-ready outfit concepts and polished photography feel.</p>
-          </div>
-        </div>
-        <div class="gallery-grid">
-          <a href="#lookbook">
-            <img src="images/waist_beads.png" alt="Generated look of woman wearing waist beads" loading="lazy" />
-          </a>
-          <a href="#lookbook">
-            <img src="images/waist_beads.png" alt="Generated model styling waist beads" loading="lazy" />
-          </a>
-          <a href="#lookbook">
-            <img src="images/waist_beads.png" alt="Generated fashion look with waist beads" loading="lazy" />
-          </a>
-        </div>
-      </section>
+    <div class="section-divider"></div>
 
-      <!-- TESTIMONIALS -->
-      <section id="reviews" class="testimonials reveal" aria-labelledby="reviews-title">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">Customer love</p>
-            <h2 id="reviews-title">What our clients say</h2>
-          </div>
-        </div>
+    <!-- TESTIMONIALS -->
+    <section id="reviews" class="reveal" aria-labelledby="reviews-title">
+      <div class="section-wrap">
+        <p class="eyebrow">Customer love</p>
+        <h2 id="reviews-title" class="section-title" style="margin-bottom:2.5rem;">What our clients say</h2>
         <div class="testimonial-grid">
           <div class="testimonial-card">
             <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-              "The quality of these beads is absolutely stunning. I ordered the Sankofa necklace for my wedding
-              and received so many compliments. The craftsmanship is beyond what I expected. Will definitely order again!"
-            </p>
+            <p class="testimonial-text">"The quality of these beads is absolutely stunning. I ordered the Sankofa necklace for my wedding and received so many compliments. The craftsmanship is beyond what I expected."</p>
             <div class="testimonial-author">
-              <div class="testimonial-avatar">
-                <img src="images/waist_beads.png" alt="Customer wearing waist beads" />
-              </div>
+              <div class="testimonial-avatar"><img src="images/waist_beads.png" alt="Adwoa Mensah" /></div>
               <div class="testimonial-author-info">
                 <p class="name">Adwoa Mensah</p>
                 <p class="location">Accra, Ghana</p>
@@ -391,14 +325,9 @@
           </div>
           <div class="testimonial-card">
             <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-              "I've bought waist beads from many sellers but EmyAfroBeads are truly special. The colors are rich
-              and vibrant, and they're incredibly comfortable to wear daily. Shipped fast to London too!"
-            </p>
+            <p class="testimonial-text">"I've bought waist beads from many sellers but EmyAfroBeads are truly special. The colors are rich and vibrant, and they're incredibly comfortable to wear daily. Shipped fast to London too!"</p>
             <div class="testimonial-author">
-              <div class="testimonial-avatar">
-                <img src="images/waist_beads.png" alt="Customer wearing waist beads" />
-              </div>
+              <div class="testimonial-avatar"><img src="images/waist_beads.png" alt="Sarah Johnson" /></div>
               <div class="testimonial-author-info">
                 <p class="name">Sarah Johnson</p>
                 <p class="location">London, UK</p>
@@ -407,14 +336,9 @@
           </div>
           <div class="testimonial-card">
             <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">
-              "Ordered custom bracelets for my bridesmaids and they turned out perfect. The communication was
-              excellent and delivery was super fast. These are authentic, high-quality beads. Highly recommend!"
-            </p>
+            <p class="testimonial-text">"Ordered custom bracelets for my bridesmaids and they turned out perfect. The communication was excellent and delivery was super fast. Highly recommend!"</p>
             <div class="testimonial-author">
-              <div class="testimonial-avatar">
-                <img src="images/waist_beads.png" alt="Customer wearing waist beads" />
-              </div>
+              <div class="testimonial-avatar"><img src="images/waist_beads.png" alt="Nana Ama Owusu" /></div>
               <div class="testimonial-author-info">
                 <p class="name">Nana Ama Owusu</p>
                 <p class="location">New York, USA</p>
@@ -422,388 +346,368 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- CUSTOM ORDERS -->
-      <section id="custom" class="custom reveal" aria-labelledby="custom-title">
-        <div class="custom-card">
-          <div class="custom-content">
-            <p class="eyebrow">Bespoke service</p>
-            <h2 id="custom-title">Beads designed for your story</h2>
-            <p>
-              Whether it's for a wedding, festival, naming ceremony, or personal milestone — tell us your colors,
-              sizes, and story. We'll craft a one-of-a-kind set in our Accra atelier and share progress
-              as we string each bead by hand.
-            </p>
-            <div class="custom-actions">
-              <a id="whatsappBtn" class="btn primary" href="https://wa.me/233XXXXXXXXXX?text=Hello%20EmyAfroBeads!%20I'd%20like%20to%20place%20a%20custom%20order." target="_blank" rel="noopener">
-                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.126 1.527 5.86L.06 23.708l5.99-1.572A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.977 0-3.908-.531-5.588-1.535l-.401-.237-3.554.934.949-3.472-.26-.413A9.795 9.795 0 012.18 12c0-5.413 4.407-9.82 9.82-9.82S21.82 6.587 21.82 12s-4.407 9.82-9.82 9.82z"/>
-                </svg>
-                Order via WhatsApp
-              </a>
-              <a class="btn ghost" href="mailto:hello@emyafrobeads.com">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                  <polyline points="3 7 12 13 21 7"></polyline>
-                </svg>
-                Email us
-              </a>
-            </div>
-          </div>
-          <div class="custom-highlights">
-            <div>
-              <p class="metric">3-5 days</p>
-              <p class="metric-label">Delivery time</p>
-            </div>
-            <div>
-              <p class="metric">30+</p>
-              <p class="metric-label">Color stories</p>
-            </div>
-            <div>
-              <p class="metric">100%</p>
-              <p class="metric-label">Handcrafted</p>
-            </div>
+    <!-- CUSTOM ORDERS -->
+    <section id="custom" class="reveal">
+      <div class="custom-inner">
+        <div>
+          <p class="eyebrow">Bespoke service</p>
+          <h2>Beads designed for your story</h2>
+          <p>
+            Whether it's for a wedding, festival, naming ceremony, or personal milestone — tell us your colors,
+            sizes, and story. We'll craft a one-of-a-kind set in our Accra atelier and share progress
+            as we string each bead by hand.
+          </p>
+          <div class="custom-actions">
+            <a id="whatsappBtn" class="btn primary" href="https://wa.me/233XXXXXXXXXX?text=Hello%20EmyAfroBeads!%20I'd%20like%20to%20place%20a%20custom%20order." target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.126 1.527 5.86L.06 23.708l5.99-1.572A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.977 0-3.908-.531-5.588-1.535l-.401-.237-3.554.934.949-3.472-.26-.413A9.795 9.795 0 012.18 12c0-5.413 4.407-9.82 9.82-9.82S21.82 6.587 21.82 12s-4.407 9.82-9.82 9.82z"/></svg>
+              Order via WhatsApp
+            </a>
+            <a class="btn ghost" href="mailto:hello@emyafrobeads.com">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
+              Email us
+            </a>
           </div>
         </div>
-      </section>
-
-      <!-- NEWSLETTER -->
-      <section class="newsletter reveal" aria-labelledby="newsletter-title">
-        <div class="newsletter-card">
-          <p class="eyebrow">Stay connected</p>
-          <h2 id="newsletter-title">Join the EmyAfroBeads family</h2>
-          <p>Get early access to new collections, exclusive offers, and behind-the-scenes stories from our Accra atelier.</p>
-          <form id="newsletterForm" class="newsletter-form" novalidate>
-            <input id="newsletterEmail" type="email" placeholder="Enter your email address" required />
-            <button class="btn primary" type="submit">Subscribe</button>
-          </form>
-          <div id="newsletterSuccess" class="newsletter-success">
-            <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg> Welcome to the family! Check your inbox for a surprise.
+        <div class="custom-stats">
+          <div class="custom-stat">
+            <p class="metric">3–5 days</p>
+            <p class="metric-label">Delivery time</p>
           </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer id="contact" class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <p class="brand-name">EmyAfroBeads</p>
-            <p>Handcrafted Ghanaian beads made with love in Accra. Every piece tells a story of heritage, craftsmanship, and beauty.</p>
-            <div class="footer-social">
-              <a href="https://instagram.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><path d="M17.5 6.5h.01"></path></svg>
-              </a>
-              <a href="https://tiktok.com/@emyafrobeads" target="_blank" rel="noopener" aria-label="TikTok">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.17V11.8a4.84 4.84 0 01-3.58-1.53V6.69h3.58z"/></svg>
-              </a>
-              <a href="https://facebook.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-              </a>
-              <a href="https://x.com/emyafrobeads" target="_blank" rel="noopener" aria-label="X (Twitter)">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-            </div>
+          <div class="custom-stat">
+            <p class="metric">30+</p>
+            <p class="metric-label">Color stories</p>
           </div>
-          <div class="footer-col">
-            <h4>Quick Links</h4>
-            <a href="#shop">Shop All</a>
-            <a href="#story">Our Story</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#custom">Custom Orders</a>
-          </div>
-          <div class="footer-col">
-            <h4>Customer Care</h4>
-            <a href="mailto:hello@emyafrobeads.com">Contact Us</a>
-            <a href="#">Shipping Info</a>
-            <a href="#">Returns Policy</a>
-            <a href="#">Size Guide</a>
-            <a href="#">FAQs</a>
-          </div>
-          <div class="footer-col">
-            <h4>Get in Touch</h4>
-            <a href="mailto:hello@emyafrobeads.com">hello@emyafrobeads.com</a>
-            <a href="https://wa.me/233XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
-            <a href="#">Accra, Ghana</a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2026 EmyAfroBeads. All rights reserved.</p>
-          <div class="footer-payments">
-            <span class="payment-pill paystack">Paystack</span>
-            <span class="payment-pill visa">Visa</span>
-            <span class="payment-pill mastercard">Mastercard</span>
-            <span class="payment-pill mob-money">Mobile Money</span>
+          <div class="custom-stat">
+            <p class="metric">100%</p>
+            <p class="metric-label">Handcrafted</p>
           </div>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <!-- CART DRAWER -->
-    <div id="cartDrawer" class="cart-drawer" aria-hidden="true">
-      <div class="cart-header">
-        <div class="cart-header-title">
-          <span class="cart-header-icon">🛒</span>
-          <h3>Your Orders</h3>
-        </div>
-        <button id="closeCart" class="icon-button" type="button" aria-label="Close cart">✕</button>
-      </div>
-      <div id="cartItems" class="cart-items"></div>
-      <div id="cartEmpty" class="cart-empty">
-        <div class="cart-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1.5 11h-9L6 8Z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /></svg></div>
-        <p>Your bag is empty</p>
-        <p style="font-size:12px; margin-top:4px;">Add some beautiful beads to get started.</p>
-      </div>
-      <div class="cart-summary">
-        <div class="cart-subtotal">
-          <span>Subtotal</span>
-          <span id="cartSubtotal">GHS 0</span>
-        </div>
-        <div class="cart-subtotal">
-          <span>Shipping</span>
-          <span>Free</span>
-        </div>
-        <div class="cart-total-row">
-          <span>Total</span>
-          <span id="cartTotal">GHS 0</span>
-        </div>
-        <div class="cart-summary-actions">
-          <button id="checkoutButton" class="btn primary" type="button" style="width:100%;">
-            Proceed to Checkout
-          </button>
-          <button id="clearCart" class="btn ghost" type="button" style="width:100%;">
-            Clear Bag
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
-
-    <!-- QUICK VIEW MODAL -->
-    <div id="quickviewModal" class="quickview-modal" aria-hidden="true">
-      <div class="quickview-overlay" id="quickviewOverlay"></div>
-      <div class="quickview-content">
-        <div class="quickview-image">
-          <img id="quickviewImage" src="" alt="" />
-        </div>
-        <div class="quickview-details">
-          <button id="quickviewClose" class="icon-button quickview-close" type="button" aria-label="Close">✕</button>
-          <p id="quickviewCategory" class="quickview-category"></p>
-          <h3 id="quickviewName"></h3>
-          <div class="quickview-rating">
-            <span class="stars" id="quickviewStars"></span>
-            <span id="quickviewRatingText"></span>
-          </div>
-          <p id="quickviewDescription" class="quickview-description"></p>
-          <p id="quickviewPrice" class="quickview-price"></p>
-          <div class="quickview-options">
-            <label class="quickview-label">
-              <span>Strands</span>
-              <select id="quickviewStrands" class="strand-select">
-                <option value="50">50 strands</option>
-                <option value="75">75 strands</option>
-                <option value="100">100 strands</option>
-                <option value="200">200 strands</option>
-              </select>
-            </label>
-          </div>
-          <div class="quickview-actions">
-            <button id="quickviewAddCart" class="btn primary" type="button">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
-                <path d="M3 6h18"></path>
-                <path d="M16 10a4 4 0 01-8 0"></path>
-              </svg>
-              Add to Bag
-            </button>
-            <button id="quickviewWishlist" class="btn ghost" type="button">♡ Wishlist</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CHECKOUT MODAL -->
-    <div id="checkoutModal" class="checkout-modal" aria-hidden="true">
-      <div class="checkout-modal-overlay" id="checkoutOverlay"></div>
-      <div class="checkout-modal-content">
-        <div class="checkout-header">
-          <h3>Checkout</h3>
-          <button id="checkoutClose" class="icon-button" type="button" aria-label="Close">✕</button>
-        </div>
-
-        <div class="checkout-steps">
-          <div class="checkout-step active" data-step="1">
-            <span class="step-dot">1</span>
-            <span class="step-label">Shipping</span>
-          </div>
-          <div class="checkout-step" data-step="2">
-            <span class="step-dot">2</span>
-            <span class="step-label">Review</span>
-          </div>
-          <div class="checkout-step" data-step="3">
-            <span class="step-dot">3</span>
-            <span class="step-label">Payment</span>
-          </div>
-        </div>
-
-        <!-- Step 1: Shipping -->
-        <div id="checkoutStep1" class="checkout-body">
-          <div class="checkout-form-row">
-            <div class="checkout-form-group">
-              <label for="checkoutFirstName">First Name</label>
-              <input id="checkoutFirstName" type="text" placeholder="Ama" required />
-            </div>
-            <div class="checkout-form-group">
-              <label for="checkoutLastName">Last Name</label>
-              <input id="checkoutLastName" type="text" placeholder="Mensah" required />
-            </div>
-          </div>
-          <div class="checkout-form-group">
-            <label for="checkoutEmail">Email</label>
-            <input id="checkoutEmail" type="email" placeholder="you@example.com" required />
-          </div>
-          <div class="checkout-form-group">
-            <label for="checkoutPhone">Phone</label>
-            <input id="checkoutPhone" type="tel" placeholder="+233 XX XXX XXXX" required />
-          </div>
-          <div class="checkout-form-group">
-            <label for="checkoutAddress">Delivery Address</label>
-            <textarea id="checkoutAddress" rows="3" placeholder="Your full delivery address"></textarea>
-          </div>
-          <div class="checkout-form-row">
-            <div class="checkout-form-group">
-              <label for="checkoutCity">City</label>
-              <input id="checkoutCity" type="text" placeholder="Accra" />
-            </div>
-            <div class="checkout-form-group">
-              <label for="checkoutCountry">Country</label>
-              <input id="checkoutCountry" type="text" placeholder="Ghana" />
-            </div>
-          </div>
-          <div class="checkout-actions">
-            <button type="button" class="btn ghost" id="checkoutCancel">Cancel</button>
-            <button type="button" class="btn primary" id="checkoutNext1">Continue to Review</button>
-          </div>
-        </div>
-
-        <!-- Step 2: Review -->
-        <div id="checkoutStep2" class="checkout-body" style="display:none;">
-          <div id="checkoutOrderSummary" class="checkout-order-summary"></div>
-          <div class="checkout-payment-methods">
-            <p class="checkout-payment-heading">Accepted payment methods</p>
-            <div class="payment-methods-grid">
-              <div class="payment-card paystack">
-                <span class="payment-logo">P</span>
-                <span>Paystack</span>
-              </div>
-              <div class="payment-card visa">
-                <span class="payment-logo">V</span>
-                <span>Visa</span>
-              </div>
-              <div class="payment-card mastercard">
-                <span class="payment-logo">M</span>
-                <span>Mastercard</span>
-              </div>
-              <div class="payment-card mob-money">
-                <span class="payment-logo">MM</span>
-                <span>Mobile Money</span>
-              </div>
-            </div>
-          </div>
-          <div class="checkout-actions">
-            <button type="button" class="btn ghost" id="checkoutBack2">Back</button>
-            <button type="button" class="btn primary" id="checkoutNext2">Proceed to Payment</button>
-          </div>
-        </div>
-
-        <!-- Step 3: Payment / Success -->
-        <div id="checkoutStep3" class="checkout-body" style="display:none;">
-          <div class="checkout-success">
-            <div class="checkout-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></div>
-            <h3>Order Confirmed!</h3>
-            <p>Thank you for shopping with EmyAfroBeads. We'll send you a confirmation email with tracking details shortly.</p>
-            <br />
-            <button type="button" class="btn primary" id="checkoutDone">Continue Shopping</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- AUTH MODAL -->
-    <div id="authModal" class="auth-modal" aria-hidden="true">
-      <div class="auth-modal-overlay" id="authOverlay"></div>
-      <div class="auth-modal-content">
-        <div class="auth-header">
-          <h3 id="authTitle">Sign In</h3>
-          <button id="authClose" class="icon-button" type="button" aria-label="Close authentication">✕</button>
-        </div>
-
-        <div class="auth-tabs">
-          <button id="tabLogin" class="auth-tab active" type="button">Sign In</button>
-          <button id="tabRegister" class="auth-tab" type="button">Create Account</button>
-        </div>
-
-        <!-- Login Form -->
-        <form id="loginForm" novalidate>
-          <div class="auth-form-group">
-            <label for="loginEmail">Email Address</label>
-            <input id="loginEmail" type="email" placeholder="you@example.com" required />
-          </div>
-          <div class="auth-form-group">
-            <label for="loginPassword">Password</label>
-            <input id="loginPassword" type="password" placeholder="••••••••" required />
-          </div>
-          <div class="auth-actions">
-            <button type="submit" class="btn primary" id="loginSubmitBtn">Sign In</button>
-          </div>
+    <!-- NEWSLETTER -->
+    <section class="reveal">
+      <div class="newsletter-inner">
+        <p class="eyebrow">Stay connected</p>
+        <h2>Join the EmyAfroBeads family</h2>
+        <p>Get early access to new collections, exclusive offers, and behind-the-scenes stories from our Accra atelier.</p>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <input id="newsletterEmail" type="email" placeholder="Enter your email address" required />
+          <button class="btn primary" type="submit">Subscribe</button>
         </form>
+        <div id="newsletterSuccess" class="newsletter-success" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
+          Welcome to the family! Check your inbox for a surprise.
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <!-- Register Form -->
-        <form id="registerForm" style="display:none;" novalidate>
-          <div class="auth-form-row">
-            <div class="auth-form-group">
-              <label for="registerFirstName">First Name</label>
-              <input id="registerFirstName" type="text" placeholder="Ama" required />
-            </div>
-            <div class="auth-form-group">
-              <label for="registerLastName">Last Name</label>
-              <input id="registerLastName" type="text" placeholder="Mensah" required />
-            </div>
+  <!-- FOOTER -->
+  <footer id="contact" class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand-name">EmyAfroBeads</span>
+          <p>Handcrafted Ghanaian beads made with love in Accra. Every piece tells a story of heritage, craftsmanship, and beauty.</p>
+          <div class="footer-social">
+            <a href="https://instagram.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><path d="M17.5 6.5h.01"></path></svg>
+            </a>
+            <a href="https://tiktok.com/@emyafrobeads" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.17V11.8a4.84 4.84 0 01-3.58-1.53V6.69h3.58z"/></svg>
+            </a>
+            <a href="https://facebook.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+            </a>
+            <a href="https://x.com/emyafrobeads" target="_blank" rel="noopener" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
           </div>
-          <div class="auth-form-group">
-            <label for="registerEmail">Email Address</label>
-            <input id="registerEmail" type="email" placeholder="you@example.com" required />
-          </div>
-          <div class="auth-form-group">
-            <label for="registerPhone">Phone Number</label>
-            <input id="registerPhone" type="tel" placeholder="+233 XX XXX XXXX" />
-          </div>
-          <div class="auth-form-group">
-            <label for="registerPassword">Password</label>
-            <input id="registerPassword" type="password" placeholder="Min. 6 characters" required />
-          </div>
-          <div class="auth-actions">
-            <button type="submit" class="btn primary" id="registerSubmitBtn">Create Account</button>
-          </div>
-        </form>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="#shop">Shop All</a>
+          <a href="#story">Our Story</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#custom">Custom Orders</a>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Care</h4>
+          <a href="mailto:hello@emyafrobeads.com">Contact Us</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns Policy</a>
+          <a href="#">Size Guide</a>
+          <a href="#">FAQs</a>
+        </div>
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <a href="mailto:hello@emyafrobeads.com">hello@emyafrobeads.com</a>
+          <a href="https://wa.me/233XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="#">Accra, Ghana</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 EmyAfroBeads. All rights reserved.</p>
+        <div class="footer-payments">
+          <span class="payment-pill">Paystack</span>
+          <span class="payment-pill">Visa</span>
+          <span class="payment-pill">Mastercard</span>
+          <span class="payment-pill">Mobile Money</span>
+        </div>
       </div>
     </div>
+  </footer>
 
-    <!-- TOAST CONTAINER -->
-    <div id="toastContainer" class="toast-container"></div>
+  <!-- CART DRAWER -->
+  <div id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <div class="cart-header-title">
+        <h3>Your Bag</h3>
+      </div>
+      <button id="closeCart" class="icon-button" type="button" aria-label="Close cart">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div id="cartEmpty" class="cart-empty">
+      <div class="cart-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1.5 11h-9L6 8Z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /></svg></div>
+      <p>Your bag is empty</p>
+      <p style="font-size:13px; color:var(--ink-faint); margin-top:4px;">Add some beautiful beads to get started.</p>
+    </div>
+    <div class="cart-summary">
+      <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">GHS 0</span></div>
+      <div class="cart-subtotal"><span>Shipping</span><span>Free</span></div>
+      <div class="cart-total-row"><span>Total</span><span id="cartTotal">GHS 0</span></div>
+      <div class="cart-summary-actions">
+        <button id="checkoutButton" class="btn primary" type="button">Proceed to Checkout</button>
+        <button id="clearCart" class="btn ghost" type="button">Clear Bag</button>
+      </div>
+    </div>
+  </div>
+  <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
 
-    <!-- BACK TO TOP -->
-    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 15l-6-6-6 6"></path>
-      </svg>
-    </button>
+  <!-- QUICK VIEW MODAL -->
+  <div id="quickviewModal" class="quickview-modal" aria-hidden="true">
+    <div class="quickview-overlay" id="quickviewOverlay"></div>
+    <div class="quickview-content">
+      <div class="quickview-image">
+        <img id="quickviewImage" src="" alt="" />
+      </div>
+      <div class="quickview-details">
+        <button id="quickviewClose" class="icon-button quickview-close" type="button" aria-label="Close">✕</button>
+        <p id="quickviewCategory" class="quickview-category"></p>
+        <h3 id="quickviewName"></h3>
+        <div class="quickview-rating">
+          <span class="stars" id="quickviewStars"></span>
+          <span id="quickviewRatingText"></span>
+        </div>
+        <p id="quickviewDescription" class="quickview-description"></p>
+        <p id="quickviewPrice" class="quickview-price"></p>
+        <div class="quickview-options">
+          <label class="quickview-label">
+            <span>Strands</span>
+            <select id="quickviewStrands" class="strand-select">
+              <option value="50">50 strands</option>
+              <option value="75">75 strands</option>
+              <option value="100">100 strands</option>
+              <option value="200">200 strands</option>
+            </select>
+          </label>
+        </div>
+        <div class="quickview-actions">
+          <button id="quickviewAddCart" class="btn primary" type="button">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 01-8 0"></path></svg>
+            Add to Bag
+          </button>
+          <button id="quickviewWishlist" class="btn ghost" type="button">♡ Wishlist</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Paystack SDK & Main App -->
-    <script src="https://js.paystack.co/v2/inline.js" defer></script>
-    <script src="app.js" defer></script>
-  </body>
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutModal" class="checkout-modal" aria-hidden="true">
+    <div class="checkout-modal-overlay" id="checkoutOverlay"></div>
+    <div class="checkout-modal-content">
+      <div class="checkout-header">
+        <h3>Checkout</h3>
+        <button id="checkoutClose" class="icon-button" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="checkout-steps">
+        <div class="checkout-step active" data-step="1">
+          <span class="step-dot">1</span>
+          <span class="step-label">Shipping</span>
+        </div>
+        <div class="checkout-step" data-step="2">
+          <span class="step-dot">2</span>
+          <span class="step-label">Review</span>
+        </div>
+        <div class="checkout-step" data-step="3">
+          <span class="step-dot">3</span>
+          <span class="step-label">Payment</span>
+        </div>
+      </div>
+      <div id="checkoutStep1" class="checkout-body">
+        <div class="checkout-form-row">
+          <div class="checkout-form-group">
+            <label for="checkoutFirstName">First Name</label>
+            <input id="checkoutFirstName" type="text" placeholder="Ama" required />
+          </div>
+          <div class="checkout-form-group">
+            <label for="checkoutLastName">Last Name</label>
+            <input id="checkoutLastName" type="text" placeholder="Mensah" required />
+          </div>
+        </div>
+        <div class="checkout-form-group">
+          <label for="checkoutEmail">Email</label>
+          <input id="checkoutEmail" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="checkout-form-group">
+          <label for="checkoutPhone">Phone</label>
+          <input id="checkoutPhone" type="tel" placeholder="+233 XX XXX XXXX" required />
+        </div>
+        <div class="checkout-form-group">
+          <label for="checkoutAddress">Delivery Address</label>
+          <textarea id="checkoutAddress" rows="3" placeholder="Your full delivery address"></textarea>
+        </div>
+        <div class="checkout-form-row">
+          <div class="checkout-form-group">
+            <label for="checkoutCity">City</label>
+            <input id="checkoutCity" type="text" placeholder="Accra" />
+          </div>
+          <div class="checkout-form-group">
+            <label for="checkoutCountry">Country</label>
+            <input id="checkoutCountry" type="text" placeholder="Ghana" />
+          </div>
+        </div>
+        <div class="checkout-actions">
+          <button type="button" class="btn ghost" id="checkoutCancel">Cancel</button>
+          <button type="button" class="btn primary" id="checkoutNext1">Continue to Review</button>
+        </div>
+      </div>
+      <div id="checkoutStep2" class="checkout-body" style="display:none;">
+        <div id="checkoutOrderSummary" class="checkout-order-summary"></div>
+        <div class="checkout-payment-methods">
+          <p class="checkout-payment-heading">Accepted payment methods</p>
+          <div class="payment-methods-grid">
+            <div class="payment-card"><span class="payment-logo">P</span><span>Paystack</span></div>
+            <div class="payment-card"><span class="payment-logo">V</span><span>Visa</span></div>
+            <div class="payment-card"><span class="payment-logo">M</span><span>Mastercard</span></div>
+            <div class="payment-card"><span class="payment-logo">MM</span><span>Mobile Money</span></div>
+          </div>
+        </div>
+        <div class="checkout-actions">
+          <button type="button" class="btn ghost" id="checkoutBack2">Back</button>
+          <button type="button" class="btn primary" id="checkoutNext2">Proceed to Payment</button>
+        </div>
+      </div>
+      <div id="checkoutStep3" class="checkout-body" style="display:none;">
+        <div class="checkout-success">
+          <div class="checkout-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></div>
+          <h3>Order Confirmed!</h3>
+          <p>Thank you for shopping with EmyAfroBeads. We'll send you a confirmation email with tracking details shortly.</p>
+          <button type="button" class="btn primary" id="checkoutDone">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div id="authModal" class="auth-modal" aria-hidden="true">
+    <div class="auth-modal-overlay" id="authOverlay"></div>
+    <div class="auth-modal-content">
+      <div class="auth-header">
+        <h3 id="authTitle">Sign In</h3>
+        <button id="authClose" class="icon-button" type="button" aria-label="Close authentication">✕</button>
+      </div>
+      <div class="auth-tabs">
+        <button id="tabLogin" class="auth-tab active" type="button">Sign In</button>
+        <button id="tabRegister" class="auth-tab" type="button">Create Account</button>
+      </div>
+      <form id="loginForm" novalidate>
+        <div class="auth-form-group">
+          <label for="loginEmail">Email Address</label>
+          <input id="loginEmail" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="auth-form-group">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password" placeholder="••••••••" required />
+        </div>
+        <div class="auth-actions">
+          <button type="submit" class="btn primary" id="loginSubmitBtn">Sign In</button>
+        </div>
+      </form>
+      <form id="registerForm" style="display:none;" novalidate>
+        <div class="auth-form-row">
+          <div class="auth-form-group">
+            <label for="registerFirstName">First Name</label>
+            <input id="registerFirstName" type="text" placeholder="Ama" required />
+          </div>
+          <div class="auth-form-group">
+            <label for="registerLastName">Last Name</label>
+            <input id="registerLastName" type="text" placeholder="Mensah" required />
+          </div>
+        </div>
+        <div class="auth-form-group">
+          <label for="registerEmail">Email Address</label>
+          <input id="registerEmail" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="auth-form-group">
+          <label for="registerPhone">Phone Number</label>
+          <input id="registerPhone" type="tel" placeholder="+233 XX XXX XXXX" />
+        </div>
+        <div class="auth-form-group">
+          <label for="registerPassword">Password</label>
+          <input id="registerPassword" type="password" placeholder="Min. 6 characters" required />
+        </div>
+        <div class="auth-actions">
+          <button type="submit" class="btn primary" id="registerSubmitBtn">Create Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- BACK TO TOP -->
+  <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"></path></svg>
+  </button>
+
+  <script src="https://js.paystack.co/v2/inline.js" defer></script>
+  <script src="app.js" defer></script>
+
+  <script>
+    // Header scroll
+    const hdr = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+    // Mobile nav
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileOverlay = document.getElementById('mobileNavOverlay');
+    const mobileClose = document.getElementById('mobileNavClose');
+    const openMobile = () => { mobileNav.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    const closeMobile = () => { mobileNav.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; };
+    hamburger?.addEventListener('click', openMobile);
+    mobileClose?.addEventListener('click', closeMobile);
+    mobileOverlay?.addEventListener('click', closeMobile);
+    mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
+
+    // Reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => { btt?.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
+    btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
 </html>

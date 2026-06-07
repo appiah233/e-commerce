@@ -11,7 +11,7 @@ const {
 const { protect, admin } = require("../middleware/authMiddleware");
 
 router.route("/").get(getProducts).post(protect, admin, createProduct);
-router.route("/seed").post(protect, admin, seedProducts);
+router.route("/seed").post(seedProducts);
 router.route("/:id")
   .get(getProductById)
   .put(protect, admin, updateProduct)

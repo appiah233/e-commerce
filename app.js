@@ -82,35 +82,39 @@ function formatPrice(priceGHS) {
   }).format(converted);
 }
 
-function getProductImage(image) {
-  const waistImage = "images/waist_beads.png";
-  if (!image) return waistImage;
-  const legacyImages = [
-    "images/ig1.jpg",
-    "images/ig2.jpg",
-    "images/ig3.jpg",
-    "images/hero_beads.png",
-    "images/necklace_beads.png",
-    "images/anklet_beads.png"
+function getProductImage(image, name) {
+  const defaultImages = [
+    "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80",
+    "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600&q=80",
+    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80",
+    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80"
   ];
-  return legacyImages.includes(image) ? waistImage : image;
+  const hash = name ? name.split('').reduce((a, b) => a + b.charCodeAt(0), 0) : 0;
+  if (!image || image.includes("images/waist_beads.png") || image.includes("ig1") || image.includes("images/")) {
+    const idx = Math.abs(hash % defaultImages.length);
+    return idx >= 0 && idx < defaultImages.length ? defaultImages[idx] : defaultImages[0];
+  }
+  return image;
 }
 
-const strandOptions = [50, 75, 100, 200];
+const strandOptions = [50, 100, 200];
 
-function getStrandOptionsHTML(current = 50) {
-  let options = strandOptions
-    .map(
-      (value) =>
-        `<option value="${value}" ${value === current ? "selected" : ""}>${value} strands</option>`
-    )
-    .join("");
-
-  if (!strandOptions.includes(current)) {
-    options += `<option value="${current}" selected>${current} strands</option>`;
-  }
-
-  return options;
+function buildStrandOptions(container, current = 50) {
+  container.textContent = "";
+  strandOptions.forEach((value) => {
+    const opt = document.createElement("option");
+    opt.value = String(value);
+    opt.textContent = value + " strands";
+    if (value === current) opt.selected = true;
+    container.appendChild(opt);
+  });
+  // Add custom option
+  const isCustom = !strandOptions.includes(current) && current !== 50;
+  const customOpt = document.createElement("option");
+  customOpt.value = "custom";
+  customOpt.textContent = "Custom amount";
+  if (isCustom) customOpt.selected = true;
+  container.appendChild(customOpt);
 }
 
 // ---- Utility: Star Rating HTML ----
@@ -124,13 +128,28 @@ function starHTML(rating) {
 function showToast(message, icon = "✓") {
   const toast = document.createElement("div");
   toast.className = "toast";
-  toast.innerHTML = `<span class="toast-icon">${icon}</span>${message}`;
+  const iconSpan = document.createElement("span");
+  iconSpan.className = "toast-icon";
+  iconSpan.textContent = icon;
+  toast.appendChild(iconSpan);
+  toast.appendChild(document.createTextNode(message));
   toastContainer.appendChild(toast);
 
   setTimeout(() => {
     toast.classList.add("toast-out");
     toast.addEventListener("animationend", () => toast.remove());
   }, 2800);
+}
+const _escapeMap = new Map([
+  ["&", "&amp;"], ["<", "&lt;"], [">", "&gt;"],
+  ['"', "&quot;"], ["'", "&#39;"], ["/", "&#x2F;"],
+  ["`", "&#x60;"], ["=", "&#x3D;"]
+]);
+function escapeHTML(str) {
+  if (typeof str !== "string") return String(str);
+  return str.replace(/[&<>"'`=\/]/g, function (s) {
+    return _escapeMap.get(s) || s;
+  });
 }
 
 // ---- Save State ----
@@ -145,19 +164,22 @@ function saveWishlist() {
 // ---- Fetch Products from Backend (Optimized Loading & Seeding) ----
 async function fetchProducts() {
   // Show skeleton loading shimmers for top-tier visual experience
-  productGrid.innerHTML = Array(6)
-    .fill(0)
-    .map(
-      () => `
-      <div class="shimmer-card">
-        <div class="shimmer-media"></div>
-        <div class="shimmer-line title"></div>
-        <div class="shimmer-line desc"></div>
-        <div class="shimmer-line price"></div>
-      </div>
-    `
-    )
-    .join("");
+  productGrid.textContent = "";
+  const shimmerFrag = document.createDocumentFragment();
+  for (let i = 0; i < 6; i++) {
+    const card = document.createElement("div");
+    card.className = "shimmer-card";
+    const media = document.createElement("div");
+    media.className = "shimmer-media";
+    card.appendChild(media);
+    ["title", "desc", "price"].forEach((cls) => {
+      const line = document.createElement("div");
+      line.className = "shimmer-line " + cls;
+      card.appendChild(line);
+    });
+    shimmerFrag.appendChild(card);
+  }
+  productGrid.appendChild(shimmerFrag);
 
   try {
     const res = await fetch("/api/products");
@@ -181,14 +203,28 @@ async function fetchProducts() {
     }
   } catch (error) {
     console.error("Failed to load products from API:", error);
-    productGrid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--ink-muted);">
-        <p style="font-size: 48px; margin-bottom: 12px;">⚠️</p>
-        <p style="font-size: 18px; font-weight: 600;">Unable to connect to the store</p>
-        <p style="font-size: 14px; margin-top: 6px;">Please check your internet connection or server status.</p>
-        <button class="btn primary sm" onclick="fetchProducts()" style="margin-top: 16px;">Try Again</button>
-      </div>
-    `;
+    productGrid.textContent = "";
+    const errorDiv = document.createElement("div");
+    errorDiv.style.cssText = "grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--ink-muted);";
+    const emojiP = document.createElement("p");
+    emojiP.style.cssText = "font-size: 48px; margin-bottom: 12px;";
+    emojiP.textContent = "⚠️";
+    const msgP = document.createElement("p");
+    msgP.style.cssText = "font-size: 18px; font-weight: 600;";
+    msgP.textContent = "Unable to connect to the store";
+    const subP = document.createElement("p");
+    subP.style.cssText = "font-size: 14px; margin-top: 6px;";
+    subP.textContent = "Please check your internet connection or server status.";
+    const retryBtn = document.createElement("button");
+    retryBtn.className = "btn primary sm";
+    retryBtn.style.marginTop = "16px";
+    retryBtn.textContent = "Try Again";
+    retryBtn.addEventListener("click", fetchProducts);
+    errorDiv.appendChild(emojiP);
+    errorDiv.appendChild(msgP);
+    errorDiv.appendChild(subP);
+    errorDiv.appendChild(retryBtn);
+    productGrid.appendChild(errorDiv);
   }
 }
 
@@ -214,63 +250,139 @@ function renderProducts() {
     });
 
   if (list.length === 0) {
-    productGrid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--ink-muted);">
-        <p style="font-size: 48px; margin-bottom: 12px;">🔍</p>
-        <p style="font-size: 18px; font-weight: 600;">No beads found</p>
-        <p style="font-size: 14px; margin-top: 6px;">Try a different search or filter.</p>
-      </div>
-    `;
+    productGrid.textContent = "";
+    const emptyDiv = document.createElement("div");
+    emptyDiv.style.cssText = "grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--ink-muted);";
+    const emojiP2 = document.createElement("p");
+    emojiP2.style.cssText = "font-size: 48px; margin-bottom: 12px;";
+    emojiP2.textContent = "🔍";
+    const msgP2 = document.createElement("p");
+    msgP2.style.cssText = "font-size: 18px; font-weight: 600;";
+    msgP2.textContent = "No beads found";
+    const subP2 = document.createElement("p");
+    subP2.style.cssText = "font-size: 14px; margin-top: 6px;";
+    subP2.textContent = "Try a different search or filter.";
+    emptyDiv.appendChild(emojiP2);
+    emptyDiv.appendChild(msgP2);
+    emptyDiv.appendChild(subP2);
+    productGrid.appendChild(emptyDiv);
     return;
   }
 
-  productGrid.innerHTML = list
-    .map((product, index) => {
-      const id = product._id;
-      const isWishlisted = wishlist.has(id);
-      const imageSrc = getProductImage(product.image);
-      return `
-        <article class="product-card" style="--i: ${index};" data-product-id="${id}">
-          <button class="wishlist-btn ${isWishlisted ? "is-wishlisted" : ""}" type="button" data-wishlist="${id}" aria-label="Add to wishlist">
-            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path></svg>
-          </button>
-          <div class="product-visual" data-view="${id}">
-            <img src="${imageSrc}" alt="${product.name}" loading="lazy" onerror="this.src='images/waist_beads.png'" />
-            <span class="badge">${product.tag || "Handmade"}</span>
-          </div>
-          <div class="product-body">
-            <div class="product-meta">
-              <span>${product.category}</span>
-              <span class="product-rating">
-                <span class="star">★</span> ${(product.rating || 4.8).toFixed(1)}
-              </span>
-            </div>
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <div class="product-footer">
-            <div class="product-order-meta">
-              <span class="price" data-price="${product.price}">${formatPrice(product.price)}</span>
-              <label class="strand-label">
-                <span>Strands</span>
-                <select class="strand-select" data-id="${id}">
-                  ${getStrandOptionsHTML(50)}
-                </select>
-              </label>
-            </div>
-            <button class="btn primary sm" type="button" data-id="${id}">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
-                <path d="M3 6h18"></path>
-                <path d="M16 10a4 4 0 01-8 0"></path>
-              </svg>
-              Add
-            </button>
-          </div>
-        </div>
-      </article>
-      `;
-    })
-    .join("");
+  productGrid.textContent = "";
+  const frag = document.createDocumentFragment();
+  list.forEach((product, index) => {
+    const id = product._id;
+    const isWishlisted = wishlist.has(id);
+    const imageSrc = getProductImage(product.image, product.name);
+
+    const article = document.createElement("article");
+    article.className = "product-card";
+    article.style.setProperty("--i", index);
+    article.dataset.productId = id;
+
+    // Image wrapper
+    const imgWrap = document.createElement("div");
+    imgWrap.className = "product-card__img";
+    imgWrap.dataset.view = id;
+
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.alt = product.name;
+    img.loading = "lazy";
+    img.onerror = function () { this.src = 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80'; };
+    imgWrap.appendChild(img);
+
+    const badge = document.createElement("span");
+    badge.className = "badge badge--popular";
+    badge.textContent = product.tag || "Handmade";
+    imgWrap.appendChild(badge);
+
+    const wishBtn = document.createElement("button");
+    wishBtn.className = "wishlist-btn" + (isWishlisted ? " is-wishlisted" : "");
+    wishBtn.type = "button";
+    wishBtn.dataset.wishlist = id;
+    wishBtn.setAttribute("aria-label", "Add to wishlist");
+    if (isWishlisted) wishBtn.style.color = "#e06080";
+    wishBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="' + (isWishlisted ? 'none' : 'currentColor') + '" stroke="' + (isWishlisted ? 'currentColor' : '#e06080') + '" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path></svg>';
+    imgWrap.appendChild(wishBtn);
+
+    const quickAdd = document.createElement("div");
+    quickAdd.className = "quick-add";
+    const addBtn = document.createElement("button");
+    addBtn.type = "button";
+    addBtn.dataset.id = id;
+    addBtn.textContent = "+ Add to Bag";
+    quickAdd.appendChild(addBtn);
+    imgWrap.appendChild(quickAdd);
+
+    article.appendChild(imgWrap);
+
+    // Info section
+    const info = document.createElement("div");
+    info.className = "product-card__info";
+
+    const nameDiv = document.createElement("div");
+    nameDiv.className = "product-card__name";
+    nameDiv.textContent = product.name;
+    info.appendChild(nameDiv);
+
+    const subDiv = document.createElement("div");
+    subDiv.className = "product-card__sub";
+    subDiv.textContent = product.category + " · " + (product.description ? product.description.substring(0, 30) : "") + "...";
+    info.appendChild(subDiv);
+
+    const footer = document.createElement("div");
+    footer.className = "product-card__footer";
+    footer.style.marginBottom = "8px";
+
+    const priceSpan = document.createElement("span");
+    priceSpan.className = "product-card__price";
+    priceSpan.dataset.price = product.price;
+    priceSpan.textContent = formatPrice(product.price);
+    footer.appendChild(priceSpan);
+
+    const ratingSpan = document.createElement("span");
+    ratingSpan.className = "product-card__rating";
+    const starsSpan = document.createElement("span");
+    starsSpan.className = "stars";
+    starsSpan.textContent = "★★★★★";
+    ratingSpan.appendChild(starsSpan);
+    ratingSpan.appendChild(document.createTextNode(" " + (product.rating || 4.8).toFixed(1)));
+    footer.appendChild(ratingSpan);
+    info.appendChild(footer);
+
+    const orderMeta = document.createElement("div");
+    orderMeta.className = "product-order-meta";
+
+    const select = document.createElement("select");
+    select.className = "strand-select";
+    select.dataset.id = id;
+    select.style.width = "100%";
+    select.style.height = "32px";
+    buildStrandOptions(select, 50);
+    orderMeta.appendChild(select);
+
+    const customWrap = document.createElement("div");
+    customWrap.className = "strand-custom-wrap";
+    customWrap.dataset.customFor = id;
+    const customInput = document.createElement("input");
+    customInput.type = "number";
+    customInput.className = "strand-custom-input";
+    customInput.dataset.customId = id;
+    customInput.placeholder = "Enter strands";
+    customInput.min = "1";
+    customInput.max = "1000";
+    customInput.value = "50";
+    customInput.style.height = "32px";
+    customWrap.appendChild(customInput);
+    orderMeta.appendChild(customWrap);
+
+    info.appendChild(orderMeta);
+    article.appendChild(info);
+    frag.appendChild(article);
+  });
+  productGrid.appendChild(frag);
 }
 
 // ---- Update All Prices on Page ----
@@ -291,7 +403,7 @@ function renderCart() {
   const entries = Array.from(cart.entries());
 
   if (entries.length === 0) {
-    cartItemsEl.innerHTML = "";
+    cartItemsEl.textContent = "";
     cartEmptyEl.style.display = "block";
     cartTotalEl.textContent = formatPrice(0);
     cartSubtotalEl.textContent = formatPrice(0);
@@ -300,37 +412,82 @@ function renderCart() {
 
   cartEmptyEl.style.display = "none";
 
-  cartItemsEl.innerHTML = entries
-    .map(([id, qty]) => {
-      const p = products.find((item) => item._id === id);
-      if (!p) return "";
-      const strandOptionsHTML = getStrandOptionsHTML(qty);
-      const cartImageSrc = getProductImage(p.image);
-      return `
-        <div class="cart-item">
-          <div class="cart-item-image">
-            <img src="${cartImageSrc}" alt="${p.name}" onerror="this.src='images/waist_beads.png'" />
-          </div>
-          <div class="cart-item-details">
-            <span class="cart-item-name">${p.name}</span>
-            <span class="cart-item-subtitle">${qty} strands</span>
-            <span class="cart-item-price">${formatPrice(p.price * qty)}</span>
-            <div class="cart-item-actions">
-              <label class="cart-strand-label">
-                <span>Strands</span>
-                <select class="cart-strand-select" data-id="${id}">
-                  ${strandOptionsHTML}
-                </select>
-              </label>
-              <button class="qty-button" data-action="dec" data-id="${id}">−</button>
-              <button class="qty-button" data-action="inc" data-id="${id}">+</button>
-            </div>
-            <button class="cart-item-remove" data-action="remove" data-id="${id}">Remove</button>
-          </div>
-        </div>
-      `;
-    })
-    .join("");
+  cartItemsEl.textContent = "";
+  const cartFrag = document.createDocumentFragment();
+  entries.forEach(([id, qty]) => {
+    const p = products.find((item) => item._id === id);
+    if (!p) return;
+    const imgSrc = getProductImage(p.image, p.name);
+
+    const row = document.createElement("div");
+    row.className = "checkout-item";
+    row.style.cssText = "display:flex; gap:10px; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:10px;";
+
+    const img = document.createElement("img");
+    img.src = imgSrc;
+    img.alt = p.name;
+    img.style.cssText = "width:50px; height:50px; object-fit:cover; border-radius:4px;";
+    row.appendChild(img);
+
+    const details = document.createElement("div");
+    details.className = "cart-item-details";
+
+    const nameSpan = document.createElement("span");
+    nameSpan.className = "cart-item-name";
+    nameSpan.textContent = p.name;
+    details.appendChild(nameSpan);
+
+    const subSpan = document.createElement("span");
+    subSpan.className = "cart-item-subtitle";
+    subSpan.textContent = qty + " strands";
+    details.appendChild(subSpan);
+
+    const priceSpan = document.createElement("span");
+    priceSpan.className = "cart-item-price";
+    priceSpan.textContent = formatPrice(p.price * qty);
+    details.appendChild(priceSpan);
+
+    const actions = document.createElement("div");
+    actions.className = "cart-item-actions";
+
+    const label = document.createElement("label");
+    label.className = "cart-strand-label";
+    const labelText = document.createElement("span");
+    labelText.textContent = "Strands";
+    label.appendChild(labelText);
+    const strandSelect = document.createElement("select");
+    strandSelect.className = "cart-strand-select";
+    strandSelect.dataset.id = id;
+    buildStrandOptions(strandSelect, qty);
+    label.appendChild(strandSelect);
+    actions.appendChild(label);
+
+    const decBtn = document.createElement("button");
+    decBtn.className = "qty-button";
+    decBtn.dataset.action = "dec";
+    decBtn.dataset.id = id;
+    decBtn.textContent = "−";
+    actions.appendChild(decBtn);
+
+    const incBtn = document.createElement("button");
+    incBtn.className = "qty-button";
+    incBtn.dataset.action = "inc";
+    incBtn.dataset.id = id;
+    incBtn.textContent = "+";
+    actions.appendChild(incBtn);
+    details.appendChild(actions);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "cart-item-remove";
+    removeBtn.dataset.action = "remove";
+    removeBtn.dataset.id = id;
+    removeBtn.textContent = "Remove";
+    details.appendChild(removeBtn);
+
+    row.appendChild(details);
+    cartFrag.appendChild(row);
+  });
+  cartItemsEl.appendChild(cartFrag);
 
   const total = entries.reduce((sum, [id, qty]) => {
     const p = products.find((item) => item._id === id);
@@ -449,7 +606,11 @@ loginForm.addEventListener("submit", async (e) => {
 
   const submitBtn = $("#loginSubmitBtn");
   submitBtn.disabled = true;
-  submitBtn.innerHTML = `<span class="spinner"></span> Signing In...`;
+  submitBtn.textContent = "";
+  const loginSpinner = document.createElement("span");
+  loginSpinner.className = "spinner";
+  submitBtn.appendChild(loginSpinner);
+  submitBtn.appendChild(document.createTextNode(" Signing In..."));
 
   try {
     const res = await fetch("/api/users/login", {
@@ -507,7 +668,11 @@ registerForm.addEventListener("submit", async (e) => {
 
   const submitBtn = $("#registerSubmitBtn");
   submitBtn.disabled = true;
-  submitBtn.innerHTML = `<span class="spinner"></span> Registering...`;
+  submitBtn.textContent = "";
+  const regSpinner = document.createElement("span");
+  regSpinner.className = "spinner";
+  submitBtn.appendChild(regSpinner);
+  submitBtn.appendChild(document.createTextNode(" Registering..."));
 
   try {
     const res = await fetch("/api/users/register", {
@@ -563,7 +728,7 @@ function openQuickView(id) {
   const p = products.find((item) => item._id === id);
   if (!p) return;
 
-  const quickviewSrc = getProductImage(p.image);
+  const quickviewSrc = getProductImage(p.image, p.name);
   $("#quickviewImage").src = quickviewSrc;
   $("#quickviewImage").alt = p.name;
   $("#quickviewCategory").textContent = p.category;
@@ -576,7 +741,13 @@ function openQuickView(id) {
 
   const addBtn = $("#quickviewAddCart");
   addBtn.onclick = () => {
-    const quickviewQty = parseInt($("#quickviewStrands")?.value, 10) || 50;
+    const strandsSelect = $("#quickviewStrands");
+    let quickviewQty = 50;
+    if (strandsSelect.value === "custom") {
+      quickviewQty = parseInt($("#quickviewCustomInput")?.value, 10) || 50;
+    } else {
+      quickviewQty = parseInt(strandsSelect.value, 10) || 50;
+    }
     addToCart(p._id, quickviewQty);
     closeQuickView();
     openCart();
@@ -585,6 +756,9 @@ function openQuickView(id) {
   const quickviewStrands = $("#quickviewStrands");
   if (quickviewStrands) {
     quickviewStrands.value = "50";
+    // Hide custom input when opening
+    const customWrap = $("#quickviewCustomStrand");
+    if (customWrap) customWrap.style.display = "none";
   }
 
   const wishBtn = $("#quickviewWishlist");
@@ -603,6 +777,20 @@ function closeQuickView() {
   if (!cartDrawer.classList.contains("is-open") && !$("#checkoutModal").classList.contains("is-open")) {
     document.body.style.overflow = "";
   }
+}
+
+// ---- Quickview Strand Custom Toggle ----
+const quickviewStrandsEl = $("#quickviewStrands");
+if (quickviewStrandsEl) {
+  quickviewStrandsEl.addEventListener("change", (e) => {
+    const customWrap = $("#quickviewCustomStrand");
+    if (e.target.value === "custom") {
+      customWrap.style.display = "block";
+      $("#quickviewCustomInput").focus();
+    } else {
+      customWrap.style.display = "none";
+    }
+  });
 }
 
 // ---- Checkout & Paystack Integration ----
@@ -641,23 +829,50 @@ function updateCheckoutSteps() {
 
 function renderOrderSummary() {
   const entries = Array.from(cart.entries());
-  let html = entries
-    .map(([id, qty]) => {
-      const p = products.find((item) => item._id === id);
-      if (!p) return "";
-      return `<div class="checkout-order-item"><span>${p.name} × ${qty}</span><span>${formatPrice(p.price * qty)}</span></div>`;
-    })
-    .join("");
+  const container = $("#checkoutOrderSummary");
+  container.textContent = "";
+  const frag = document.createDocumentFragment();
+
+  entries.forEach(([id, qty]) => {
+    const p = products.find((item) => item._id === id);
+    if (!p) return;
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "checkout-order-item";
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = p.name + " × " + qty;
+    const priceSpan = document.createElement("span");
+    priceSpan.textContent = formatPrice(p.price * qty);
+    itemDiv.appendChild(nameSpan);
+    itemDiv.appendChild(priceSpan);
+    frag.appendChild(itemDiv);
+  });
 
   const total = entries.reduce((sum, [id, qty]) => {
     const p = products.find((item) => item._id === id);
     return p ? sum + p.price * qty : sum;
   }, 0);
 
-  html += `<div class="checkout-order-item"><span>Shipping</span><span>Free</span></div>`;
-  html += `<div class="checkout-order-total"><span>Total</span><span>${formatPrice(total)}</span></div>`;
+  const shipDiv = document.createElement("div");
+  shipDiv.className = "checkout-order-item";
+  const shipLabel = document.createElement("span");
+  shipLabel.textContent = "Shipping";
+  const shipValue = document.createElement("span");
+  shipValue.textContent = "Free";
+  shipDiv.appendChild(shipLabel);
+  shipDiv.appendChild(shipValue);
+  frag.appendChild(shipDiv);
 
-  $("#checkoutOrderSummary").innerHTML = html;
+  const totalDiv = document.createElement("div");
+  totalDiv.className = "checkout-order-total";
+  const totalLabel = document.createElement("span");
+  totalLabel.textContent = "Total";
+  const totalValue = document.createElement("span");
+  totalValue.textContent = formatPrice(total);
+  totalDiv.appendChild(totalLabel);
+  totalDiv.appendChild(totalValue);
+  frag.appendChild(totalDiv);
+
+  container.appendChild(frag);
 }
 
 // Calculate cart total price
@@ -684,9 +899,13 @@ async function processPayment() {
   }
 
   const checkoutBtn = $("#checkoutNext2");
-  const originalHtml = checkoutBtn.innerHTML;
+  const originalText = checkoutBtn.textContent;
   checkoutBtn.disabled = true;
-  checkoutBtn.innerHTML = `<span class="spinner"></span> Redirecting to Payment...`;
+  checkoutBtn.textContent = "";
+  const spinner = document.createElement("span");
+  spinner.className = "spinner";
+  checkoutBtn.appendChild(spinner);
+  checkoutBtn.appendChild(document.createTextNode(" Redirecting to Payment..."));
 
   try {
     // 1. Create order on backend (secures price calculation and validates stock)
@@ -740,7 +959,7 @@ async function processPayment() {
       onCancel: function () {
         showToast("Payment cancelled by client", "⚠️");
         checkoutBtn.disabled = false;
-        checkoutBtn.innerHTML = originalHtml;
+        checkoutBtn.textContent = originalText;
       }
     });
 
@@ -748,12 +967,12 @@ async function processPayment() {
     console.error("Order processing error:", err);
     showToast(err.message || "Failed to initiate payment", "⚠️");
     checkoutBtn.disabled = false;
-    checkoutBtn.innerHTML = originalHtml;
+    checkoutBtn.textContent = originalText;
   }
 }
 
 // Verification Call
-async function verifyPaymentOnBackend(reference, orderId, checkoutBtn, originalHtml) {
+async function verifyPaymentOnBackend(reference, orderId, checkoutBtn, originalText) {
   try {
     const res = await fetch("/api/payment/verify", {
       method: "POST",
@@ -786,7 +1005,7 @@ async function verifyPaymentOnBackend(reference, orderId, checkoutBtn, originalH
   } finally {
     if (checkoutBtn) {
       checkoutBtn.disabled = false;
-      checkoutBtn.innerHTML = originalHtml;
+      checkoutBtn.textContent = originalText;
     }
   }
 }
@@ -811,20 +1030,36 @@ function updateSearchDropdown() {
     return;
   }
 
-  searchDropdown.innerHTML = results
-    .map(
-      (p) => `
-    <div class="search-dropdown-item" data-search-id="${p._id}">
-      <img src="${p.image}" alt="" />
-      <div class="search-item-info">
-        <div class="search-item-name">${p.name}</div>
-        <div class="search-item-price">${formatPrice(p.price)}</div>
-      </div>
-    </div>
-  `
-    )
-    .join("");
+  // Clear previous results
+  searchDropdown.textContent = "";
+  const fragment = document.createDocumentFragment();
+  results.forEach((p) => {
+    const item = document.createElement("div");
+    item.className = "search-dropdown-item";
+    item.dataset.searchId = p._id;
 
+    const img = document.createElement("img");
+    img.src = p.image;
+    img.alt = "";
+
+    const info = document.createElement("div");
+    info.className = "search-item-info";
+
+    const nameDiv = document.createElement("div");
+    nameDiv.className = "search-item-name";
+    nameDiv.textContent = p.name;
+
+    const priceDiv = document.createElement("div");
+    priceDiv.className = "search-item-price";
+    priceDiv.textContent = formatPrice(p.price);
+
+    info.appendChild(nameDiv);
+    info.appendChild(priceDiv);
+    item.appendChild(img);
+    item.appendChild(info);
+    fragment.appendChild(item);
+  });
+  searchDropdown.appendChild(fragment);
   searchDropdown.classList.add("is-open");
 }
 
@@ -927,7 +1162,13 @@ productGrid.addEventListener("click", (e) => {
     e.stopPropagation();
     const card = addBtn.closest(".product-card");
     const qtySelect = card?.querySelector(".strand-select");
-    const strands = parseInt(qtySelect?.value, 10) || 50;
+    let strands = 50;
+    if (qtySelect?.value === "custom") {
+      const customInput = card?.querySelector(".strand-custom-input");
+      strands = parseInt(customInput?.value, 10) || 50;
+    } else {
+      strands = parseInt(qtySelect?.value, 10) || 50;
+    }
     addToCart(addBtn.dataset.id, strands);
     return;
   }
@@ -940,8 +1181,24 @@ productGrid.addEventListener("click", (e) => {
   }
 
   const card = e.target.closest("[data-product-id]");
-  if (card && !e.target.closest("button")) {
+  if (card && !e.target.closest("button") && !e.target.closest("select") && !e.target.closest("input")) {
     openQuickView(card.dataset.productId);
+  }
+});
+
+// Product grid — strand select custom toggle
+productGrid.addEventListener("change", (e) => {
+  const strandSelect = e.target.closest(".strand-select");
+  if (!strandSelect) return;
+  const card = strandSelect.closest(".product-card");
+  const customWrap = card?.querySelector(".strand-custom-wrap");
+  if (!customWrap) return;
+  if (strandSelect.value === "custom") {
+    customWrap.style.display = "block";
+    const customInput = customWrap.querySelector(".strand-custom-input");
+    if (customInput) customInput.focus();
+  } else {
+    customWrap.style.display = "none";
   }
 });
 

@@ -1,713 +1,1249 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EmyAfroBeads | Handcrafted Ghanaian Beads &amp; Jewelry</title>
-  <meta name="description" content="EmyAfroBeads offers handcrafted Ghanaian beads inspired by African traditions. Shop bracelets, necklaces, waist beads, and anklets with free worldwide shipping." />
-  <meta name="keywords" content="Ghanaian beads, African jewelry, waist beads, handcrafted bracelets, recycled glass beads, Accra Ghana" />
-  <meta property="og:title" content="EmyAfroBeads | Handcrafted Ghanaian Beads" />
-  <meta property="og:description" content="Small-batch glass and clay beads handcrafted in Ghana. Each set is hand-strung and finished in rich earth tones." />
-  <meta property="og:type" content="website" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EmyAfroBeads — Signature Beads for Modern Rituals</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://js.paystack.co" />
-  <link rel="dns-prefetch" href="https://js.paystack.co" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ──────────────────────────────────────────────
+       TOKENS
+    ────────────────────────────────────────────── */
+    :root {
+      --bg:         #120b07;
+      --surface:    #1e1208;
+      --surface-2:  #2a1a0e;
+      --border:     rgba(212, 160, 90, 0.18);
+      --gold:       #c89b5a;
+      --gold-light: #e0b87a;
+      --gold-dim:   rgba(200, 155, 90, 0.15);
+      --text:       #f0e6d6;
+      --text-muted: #9a8575;
+      --accent:     #c05c2a;
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --radius-pill:100px;
+      --nav-h:      70px;
+      --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    [data-theme="light"] {
+      --bg:         #faf6f0;
+      --surface:    #ffffff;
+      --surface-2:  #f2ebe0;
+      --border:     rgba(160, 110, 60, 0.18);
+      --text:       #2a1a0e;
+      --text-muted: #7a6555;
+    }
+
+    /* ──────────────────────────────────────────────
+       RESET & BASE
+    ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ──────────────────────────────────────────────
+       ★  NAVBAR  ★
+       Structure: [logo] [nav-links] [utility-icons]
+       Cart is always fully visible on the right.
+    ────────────────────────────────────────────── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: var(--nav-h);
+      background: rgba(18, 11, 7, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(16px, 4vw, 48px);
+      gap: 20px;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .nav-logo__orb {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #f0c070, #c05c2a 60%, #7a3010);
+      box-shadow: 0 0 18px rgba(200, 155, 90, 0.4);
+      flex-shrink: 0;
+    }
+    .nav-logo__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* Centre nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      transition: color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold-light);
+      background: var(--gold-dim);
+    }
+
+    /* Right utility cluster */
+    .nav-utils {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Search — expandable */
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      transition: width var(--transition), background var(--transition);
+      width: 38px;
+    }
+    .search-wrap:focus-within {
+      width: 210px;
+      background: var(--surface);
+      border-color: var(--gold);
+    }
+    .search-wrap input {
+      width: 0;
+      min-width: 0;
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      padding: 0;
+      transition: padding var(--transition), width var(--transition);
+    }
+    .search-wrap:focus-within input {
+      padding: 0 8px;
+      width: 160px;
+    }
+    .search-btn {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .search-btn:hover { color: var(--gold); }
+
+    /* Icon button base */
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: color var(--transition), background var(--transition);
+      position: relative;
+    }
+    .icon-btn:hover {
+      color: var(--gold-light);
+      background: var(--gold-dim);
+    }
+
+    /* Currency selector — compact */
+    .currency-btn {
+      height: 38px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 12px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .currency-btn:hover {
+      color: var(--gold-light);
+      border-color: var(--gold);
+    }
+    .currency-btn svg { flex-shrink: 0; }
+
+    /* Divider */
+    .nav-divider {
+      width: 1px;
+      height: 22px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+
+    /* ★ Cart button — always fully visible, stands out */
+    .cart-btn {
+      height: 42px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 18px;
+      background: var(--gold);
+      color: #1a0c04;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .cart-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(200, 155, 90, 0.35);
+    }
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg);
+    }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    /* ──────────────────────────────────────────────
+       HERO SECTION
+    ────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: calc(100vh - var(--nav-h));
+      min-height: 500px;
+      max-height: 780px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(160deg, rgba(30,18,8,0.1) 0%, rgba(18,11,7,0.85) 70%),
+        url('https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=1600&q=80') center/cover no-repeat;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(40px, 6vw, 80px);
+      max-width: 640px;
+    }
+    .hero__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hero__label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .hero__title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero__sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+    .hero__ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      height: 48px;
+      border-radius: var(--radius-pill);
+      padding: 0 30px;
+      background: var(--gold);
+      color: #1a0c04;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(200, 155, 90, 0.38);
+    }
+    .btn-ghost {
+      height: 48px;
+      border-radius: var(--radius-pill);
+      padding: 0 28px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    /* Hero scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 30px;
+      right: clamp(24px, 4vw, 60px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      writing-mode: vertical-rl;
+      animation: nudge 2.2s ease-in-out infinite;
+    }
+    @keyframes nudge {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ──────────────────────────────────────────────
+       SHOP SECTION
+    ────────────────────────────────────────────── */
+    .shop {
+      padding: clamp(60px, 8vw, 100px) clamp(16px, 4vw, 60px);
+    }
+    .shop__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .shop__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .shop__label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .shop__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--text);
+    }
+    /* Filter pills + sort */
+    .shop__controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      height: 36px;
+      padding: 0 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      background: transparent;
+      transition: all var(--transition);
+    }
+    .pill:hover { border-color: var(--gold); color: var(--gold-light); }
+    .pill.active {
+      background: var(--gold);
+      color: #1a0c04;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+    .sort-select {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      outline: none;
+      cursor: pointer;
+      margin-left: auto;
+    }
+    .sort-select:focus { border-color: var(--gold); color: var(--text); }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+      border-color: rgba(200,155,90,0.35);
+    }
+    .product-card__img {
+      position: relative;
+      aspect-ratio: 1 / 1.1;
+      overflow: hidden;
+    }
+    .product-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .product-card:hover .product-card__img img { transform: scale(1.06); }
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      height: 26px;
+      padding: 0 10px;
+      border-radius: var(--radius-pill);
+      background: #000;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+    }
+    .badge--new    { background: var(--gold); color: #1a0c04; }
+    .badge--popular { background: var(--accent); }
+    .badge--limited { background: #1f1f1f; border: 1px solid var(--border); }
+    .wishlist-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(18,11,7,0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: color var(--transition), background var(--transition);
+    }
+    .wishlist-btn:hover { color: #e06080; background: rgba(18,11,7,0.9); }
+
+    /* Quick-add overlay */
+    .quick-add {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px;
+      background: linear-gradient(to top, rgba(18,11,7,0.95), transparent);
+      transform: translateY(100%);
+      transition: transform var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-card:hover .quick-add { transform: translateY(0); }
+    .quick-add button {
+      width: 100%;
+      height: 40px;
+      border-radius: var(--radius-pill);
+      background: var(--gold);
+      color: #1a0c04;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background var(--transition);
+    }
+    .quick-add button:hover { background: var(--gold-light); }
+
+    .product-card__info {
+      padding: 16px 18px 20px;
+    }
+    .product-card__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .product-card__sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .product-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-card__price {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+    .product-card__rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+    .stars { color: var(--gold); letter-spacing: -1px; }
+
+    /* ──────────────────────────────────────────────
+       RESPONSIVE
+    ────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .currency-btn { display: none; }
+      .nav-divider { display: none; }
+      .hamburger { display: flex; }
+      .cart-btn span.cart-label { display: none; }
+      .cart-btn { padding: 0 14px; }
+    }
+    @media (max-width: 600px) {
+      .hero__content { padding: 40px 24px; }
+      .shop__header { flex-direction: column; align-items: flex-start; }
+      .sort-select { margin-left: 0; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+    @media (max-width: 400px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ──────────────────────────────────────────────
+       SCROLLBAR
+    ────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+
+    /* ──────────────────────────────────────────────
+       MOBILE NAV DRAWER
+    ────────────────────────────────────────────── */
+    .mobile-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      pointer-events: none;
+    }
+    .mobile-drawer__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .mobile-drawer__panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(320px, 85vw);
+      height: 100%;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      padding: 80px 32px 40px;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mobile-drawer.open { pointer-events: auto; }
+    .mobile-drawer.open .mobile-drawer__overlay { opacity: 1; }
+    .mobile-drawer.open .mobile-drawer__panel { transform: translateX(0); }
+    .mobile-drawer a {
+      font-size: 1.3rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color var(--transition);
+    }
+    .mobile-drawer a:hover { color: var(--gold-light); }
+    .mobile-drawer__close {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+    
+    /* ──────────────────────────────────────────────
+       MODALS, CART DRAWER, & TOASTS
+    ────────────────────────────────────────────── */
+    .modal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+    .modal.is-open { pointer-events: auto; }
+    .modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s; }
+    .modal.is-open .modal-overlay { opacity: 1; }
+    .modal-panel { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); width: 90%; max-width: 420px; padding: 24px; transform: translateY(20px); opacity: 0; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); max-height: 90vh; overflow-y: auto; }
+    .modal.is-open .modal-panel { transform: translateY(0); opacity: 1; }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+    .modal-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; color: var(--gold-light); }
+    .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; transition: color var(--transition); }
+    .modal-close:hover { color: var(--gold); }
+    
+    /* Forms */
+    .form-group { margin-bottom: 16px; flex: 1; }
+    .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .form-group input, .form-group select { width: 100%; height: 44px; padding: 0 14px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-family: 'Outfit', sans-serif; transition: border-color var(--transition); outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    
+    /* Auth Tabs */
+    .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .auth-tab { flex: 1; padding: 10px 0; text-align: center; font-size: 0.9rem; color: var(--text-muted); border-bottom: 2px solid transparent; transition: all var(--transition); cursor: pointer; }
+    .auth-tab.active { color: var(--gold-light); border-bottom-color: var(--gold); font-weight: 500; }
+    
+    /* Cart Drawer */
+    .cart-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 250; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .cart-drawer-overlay.is-open { opacity: 1; pointer-events: auto; }
+    .cart-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 400px; background: var(--surface); border-left: 1px solid var(--border); z-index: 251; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
+    .cart-drawer.is-open { transform: translateX(0); }
+    .cart-drawer.is-open ~ .cart-drawer-overlay { opacity: 1; pointer-events: auto; }
+    .cart-drawer-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .cart-drawer-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold-light); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .cart-summary { padding: 24px; border-top: 1px solid var(--border); background: var(--bg); }
+    
+    /* Cart Item styling */
+    .cart-item { display: flex; gap: 16px; align-items: stretch; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px; }
+    .cart-item-img { width: 70px; height: 70px; border-radius: var(--radius-sm); object-fit: cover; }
+    .cart-item-details { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .cart-item-title { font-weight: 500; color: var(--text); font-size: 0.95rem; }
+    .cart-item-price { color: var(--gold); font-weight: 600; font-size: 0.9rem; }
+    .cart-qty { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px 8px; width: fit-content; margin-top: 6px; }
+    .cart-qty button { color: var(--text-muted); font-size: 1.1rem; padding: 0 4px; }
+    .cart-qty button:hover { color: var(--gold); }
+    .cart-remove { color: #e06080; font-size: 0.8rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; align-self: flex-start; }
+    
+    /* Strand Custom Options */
+    .strand-select { margin-top: 8px; font-size: 0.8rem; padding: 4px 8px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; }
+    .strand-custom-input { width: 100%; height: 28px; padding: 0 8px; border: 1px solid var(--accent); border-radius: var(--radius-sm); background: var(--surface-2); color: var(--text); font-size: 12px; margin-top: 6px; outline: none; }
+    .strand-custom-wrap { display: none; }
+
+    /* Toasts */
+    .toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none; }
+    .toast { background: var(--surface-2); border: 1px solid var(--border); color: var(--text); padding: 12px 24px; border-radius: var(--radius-pill); font-size: 0.9rem; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(20px); transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast-success { border-color: var(--gold); }
+    .toast-error { border-color: #e06080; }
+    
+    /* Back to top */
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: #1a0c04; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 90; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .back-to-top.show { opacity: 1; pointer-events: auto; }
+    .back-to-top:hover { transform: translateY(-3px); background: var(--gold-light); }
+
+  </style>
 </head>
 <body>
 
-  <!-- Announce Bar -->
-  <div class="announce-bar">
-    <div class="announce-track">
-      <span>Free shipping on orders over GHS 300</span>
-      <span>Handcrafted in Accra, Ghana</span>
-      <span>Worldwide delivery in 3–5 days</span>
-    </div>
-  </div>
+  <!-- ═══════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════ -->
+  <header class="navbar">
 
-  <!-- Header -->
-  <header class="site-header" id="siteHeader">
-    <nav class="nav" id="mainNav">
-      <div class="brand">
-        <div class="brand-mark"></div>
-        <p class="brand-name">EmyAfroBeads</p>
-      </div>
+    <!-- Logo -->
+    <a href="/" class="nav-logo">
+      <div class="nav-logo__orb"></div>
+      <span class="nav-logo__name">EmyAfroBeads</span>
+    </a>
 
-      <div class="nav-links">
-        <a href="#shop">Shop</a>
-        <a href="#story">Our Story</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#custom">Custom</a>
-        <a href="#contact">Contact</a>
-      </div>
-
-      <div class="nav-actions">
-        <div class="search-wrapper">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-          <label>
-            <span class="sr-only">Search products</span>
-            <input id="searchInput" type="search" placeholder="Search beads..." autocomplete="off" />
-          </label>
-          <div id="searchDropdown" class="search-dropdown"></div>
-        </div>
-
-        <select id="currencySelect" class="currency-select" aria-label="Currency">
-          <option value="GHS">GHS ₵</option>
-          <option value="USD">USD $</option>
-          <option value="GBP">GBP £</option>
-          <option value="EUR">EUR €</option>
-        </select>
-
-        <button id="themeToggle" class="theme-toggle icon-btn" type="button" aria-label="Toggle dark mode">
-          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-          </svg>
-        </button>
-
-        <button id="userButton" class="user-btn" type="button" aria-label="User account">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          <span id="userBadge" class="user-badge" style="display:none;"></span>
-        </button>
-
-        <button id="cartButton" class="cart-button" type="button" aria-label="Open cart">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 6h15l-1.5 9h-12z"></path>
-            <path d="M6 6l-2-2"></path>
-            <path d="M9 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-          </svg>
-          <span class="cart-label">Bag</span>
-          <span id="cartCount" class="cart-count">0</span>
-        </button>
-
-        <button id="hamburgerBtn" class="hamburger" type="button" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+    <!-- Centre navigation -->
+    <nav class="nav-links">
+      <a href="#shop" class="active">Shop</a>
+      <a href="#story">Our Story</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#custom">Custom</a>
+      <a href="#contact">Contact</a>
     </nav>
+
+    <!-- Utility cluster (right side) -->
+    <div class="nav-utils">
+
+      <!-- Expandable search -->
+      <div class="search-wrap">
+        <button class="search-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </button>
+        <input type="text" placeholder="Search beads…" aria-label="Search beads" />
+      </div>
+
+      <!-- Currency — compact pill -->
+      <button class="currency-btn" aria-label="Change currency">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        GHS ¢
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="nav-divider"></div>
+
+      <!-- Dark / light toggle -->
+      <button class="icon-btn" aria-label="Toggle theme" id="themeToggle">
+        <svg id="moonIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+        <svg id="sunIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+
+      <!-- User -->
+      <button class="icon-btn" aria-label="My account" id="userButton">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span class="user-badge" id="userBadge" style="display:none; position:absolute; top:8px; right:8px; width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>
+      </button>
+
+      <div class="nav-divider"></div>
+
+      <!-- ★ CART — fully visible, golden, prominent -->
+      <button class="cart-btn" aria-label="Shopping bag" id="cartButton">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-label">Bag</span>
+        <div class="cart-badge" id="cartCount">0</div>
+      </button>
+
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger" id="menuBtn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <!-- Mobile Nav -->
-  <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
-  <nav id="mobileNav" class="mobile-nav">
-    <div class="mobile-nav-header">
-      <p class="brand-name">EmyAfroBeads</p>
-      <button id="mobileNavClose" class="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
+  <!-- ═══════════════════════════════════
+       MOBILE DRAWER
+  ═══════════════════════════════════ -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer__overlay" id="drawerOverlay"></div>
+    <div class="mobile-drawer__panel">
+      <button class="mobile-drawer__close" id="drawerClose" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <a href="#shop">Shop</a>
+      <a href="#story">Our Story</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#custom">Custom</a>
+      <a href="#contact">Contact</a>
     </div>
-    <div class="mobile-nav-links">
-      <a href="#shop">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 01-8 0"></path></svg>
-        Shop All
-      </a>
-      <a href="#story">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
-        Our Story
-      </a>
-      <a href="#reviews">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-        Reviews
-      </a>
-      <a href="#custom">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-        Custom Orders
-      </a>
-      <a href="#contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
-        Contact
-      </a>
-    </div>
-    <div class="mobile-nav-footer">
-      <div class="footer-social">
-        <a href="https://instagram.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><path d="M17.5 6.5h.01"></path></svg>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       HERO
+  ═══════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <div class="hero__label">The Atelier</div>
+      <h1 class="hero__title">
+        Signature beads<br/>for <em>modern</em> rituals
+      </h1>
+      <p class="hero__sub">
+        Handcrafted Afrocentric beads — bracelets, necklaces, waist beads & anklets — celebrating heritage with contemporary elegance.
+      </p>
+      <div class="hero__ctas">
+        <a href="#shop" class="btn-primary">
+          Shop Collection
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
-        <a href="https://tiktok.com/@emyafrobeads" target="_blank" rel="noopener" aria-label="TikTok">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.17V11.8a4.84 4.84 0 01-3.58-1.53V6.69h3.58z"/></svg>
-        </a>
-        <a href="https://facebook.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-        </a>
+        <a href="#custom" class="btn-ghost">Custom Order</a>
       </div>
     </div>
-  </nav>
+    <div class="hero__scroll">Scroll</div>
+  </section>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-content">
-        <p class="eyebrow">Heritage Luxe Collection</p>
-        <h1 id="hero-title">Ghanaian beadwork for modern ritual.</h1>
-        <p class="hero-copy">
-          Small-batch glass and clay beads handcrafted in Accra. Each set is hand-strung,
-          layered for daily wear, and finished in rich earth tones for timeless styling.
+  <!-- ═══════════════════════════════════
+       SHOP SECTION
+  ═══════════════════════════════════ -->
+  <section class="shop" id="shop">
+    <div class="shop__header">
+      <div>
+        <div class="shop__label">Shop the Atelier</div>
+        <h2 class="shop__title">Signature beads for modern rituals</h2>
+      </div>
+    </div>
+
+    <!-- Filters + Sort -->
+    <div class="shop__controls">
+      <div class="filter-pills">
+        <button class="pill active">All</button>
+        <button class="pill">Bracelets</button>
+        <button class="pill">Necklaces</button>
+        <button class="pill">Waist Beads</button>
+        <button class="pill">Anklets</button>
+      </div>
+      <select class="sort-select" aria-label="Sort products">
+        <option>Featured</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest</option>
+        <option>Best Selling</option>
+      </select>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="productGrid">
+
+      <!-- Card 1 -->
+      <article class="product-card">
+        <div class="product-card__img">
+          <img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80" alt="Krobo Heritage Bracelet" loading="lazy"/>
+          <span class="badge badge--limited">Limited</span>
+          <button class="wishlist-btn" aria-label="Add to wishlist">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="quick-add"><button>+ Add to Bag</button></div>
+        </div>
+        <div class="product-card__info">
+          <div class="product-card__name">Krobo Heritage Bracelet</div>
+          <div class="product-card__sub">Recycled glass · handmade</div>
+          <div class="product-card__footer">
+            <span class="product-card__price">GHS 180</span>
+            <span class="product-card__rating"><span class="stars">★★★★★</span> 4.9</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="product-card">
+        <div class="product-card__img">
+          <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600&q=80" alt="Coral Stacked Anklets" loading="lazy"/>
+          <span class="badge badge--new">New</span>
+          <button class="wishlist-btn" aria-label="Add to wishlist">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="quick-add"><button>+ Add to Bag</button></div>
+        </div>
+        <div class="product-card__info">
+          <div class="product-card__name">Coral Stacked Anklets</div>
+          <div class="product-card__sub">Seed beads · gold clasp</div>
+          <div class="product-card__footer">
+            <span class="product-card__price">GHS 220</span>
+            <span class="product-card__rating"><span class="stars">★★★★★</span> 4.8</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="product-card">
+        <div class="product-card__img">
+          <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80" alt="Adinkra Waist Beads" loading="lazy"/>
+          <span class="badge badge--popular">Popular</span>
+          <button class="wishlist-btn" aria-label="Add to wishlist">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="quick-add"><button>+ Add to Bag</button></div>
+        </div>
+        <div class="product-card__info">
+          <div class="product-card__name">Adinkra Waist Beads</div>
+          <div class="product-card__sub">Cotton thread · glass</div>
+          <div class="product-card__footer">
+            <span class="product-card__price">GHS 150</span>
+            <span class="product-card__rating"><span class="stars">★★★★★</span> 5.0</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="product-card">
+        <div class="product-card__img">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80" alt="Kente Bead Necklace" loading="lazy"/>
+          <span class="badge badge--popular">Popular</span>
+          <button class="wishlist-btn" aria-label="Add to wishlist">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <div class="quick-add"><button>+ Add to Bag</button></div>
+        </div>
+        <div class="product-card__info">
+          <div class="product-card__name">Kente Bead Necklace</div>
+          <div class="product-card__sub">Krobo glass · 18" chain</div>
+          <div class="product-card__footer">
+            <span class="product-card__price">GHS 310</span>
+            <span class="product-card__rating"><span class="stars">★★★★☆</span> 4.7</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       JS: Theme toggle, filter pills, mobile drawer
+  ═══════════════════════════════════ -->
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('themeToggle');
+    const moon = document.getElementById('moonIcon');
+    const sun = document.getElementById('sunIcon');
+    toggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      moon.style.display = isDark ? 'none' : '';
+      sun.style.display  = isDark ? '' : 'none';
+    });
+
+    // Filter pills
+    document.querySelectorAll('.pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+
+    // Mobile drawer
+    const menuBtn     = document.getElementById('menuBtn');
+    const drawer      = document.getElementById('mobileDrawer');
+    const drawerClose = document.getElementById('drawerClose');
+    const overlay     = document.getElementById('drawerOverlay');
+    const openDrawer  = () => drawer.classList.add('open');
+    const closeDrawer = () => drawer.classList.remove('open');
+    menuBtn.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    // Wishlist heart toggle
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const svg = btn.querySelector('svg');
+        const filled = btn.dataset.liked === 'true';
+        btn.dataset.liked = !filled;
+        svg.setAttribute('fill', filled ? 'none' : '#e06080');
+        svg.setAttribute('stroke', filled ? 'currentColor' : '#e06080');
+        btn.style.color = filled ? '' : '#e06080';
+      });
+    });
+  <!-- ═══════════════════════════════════
+       STORY SECTION
+  ═══════════════════════════════════ -->
+  <section class="shop" id="story" style="padding-top:40px;">
+    <div class="shop__header">
+      <div>
+        <div class="shop__label">Our Heritage</div>
+        <h2 class="shop__title">Crafted with tradition</h2>
+        <p style="color:var(--text-muted); line-height:1.6; max-width:600px; margin-top:20px;">
+          EmyAfroBeads was born from a deep love for African culture. Each bead tells a story of tradition, of celebration, and of the skilled hands that shaped it. We partner directly with artisan communities in Ghana, ensuring every piece is ethically sourced.
         </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#shop">Shop signature beads</a>
-          <a class="btn ghost" href="#custom">Request custom order</a>
-        </div>
-        <div class="hero-note">
-          <span class="pill">Free worldwide shipping</span>
-          <span>Delivery in 3–5 business days</span>
-        </div>
-        <div class="hero-metrics">
-          <div>
-            <p class="metric">520+</p>
-            <p class="metric-label">Orders fulfilled</p>
-          </div>
-          <div>
-            <p class="metric">4.9</p>
-            <p class="metric-label">Client rating</p>
-          </div>
-          <div>
-            <p class="metric">Accra</p>
-            <p class="metric-label">Made in Ghana</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-visual-side">
-        <img class="hero-img-main" src="images/waist_beads.png" alt="Woman wearing waist beads" loading="eager" decoding="async" fetchpriority="high" />
-        <div class="hero-card-float">
-          <img class="hero-card-img" src="images/necklace_beads.png" alt="Necklace beads" />
-          <div class="hero-card-info">
-            <p class="hero-card-name">Sankofa Necklace</p>
-            <p class="hero-card-price" data-price="220">GHS 220</p>
-          </div>
-          <button class="hero-card-add" type="button" data-quick-add="n1" aria-label="Quick add to bag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- SHOP -->
-    <section id="shop" class="reveal" aria-labelledby="shop-title">
-      <div class="section-wrap">
-        <div class="section-header-row">
-          <div>
-            <p class="eyebrow">Shop the atelier</p>
-            <h2 id="shop-title" class="section-title">Signature beads for modern rituals</h2>
-          </div>
-        </div>
-        <div class="filters-row">
-          <div class="filter-buttons" role="tablist" aria-label="Product categories">
-            <button class="filter-button is-active" data-filter="All" type="button">All</button>
-            <button class="filter-button" data-filter="Bracelets" type="button">Bracelets</button>
-            <button class="filter-button" data-filter="Necklaces" type="button">Necklaces</button>
-            <button class="filter-button" data-filter="Waist Beads" type="button">Waist Beads</button>
-            <button class="filter-button" data-filter="Anklets" type="button">Anklets</button>
-          </div>
-          <label class="sort-label">
-            <span class="sr-only">Sort products</span>
-            <select id="sortSelect">
-              <option value="featured">Featured</option>
-              <option value="low">Price: Low → High</option>
-              <option value="high">Price: High → Low</option>
-              <option value="rating">Top Rated</option>
-            </select>
-          </label>
-        </div>
-        <div id="productGrid" class="product-grid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- OUR STORY -->
-    <section id="story" class="reveal" aria-labelledby="story-title">
-      <div class="section-wrap">
-        <p class="eyebrow">Our heritage</p>
-        <h2 id="story-title" class="section-title" style="margin-bottom:3rem;">The art of Ghanaian beadwork</h2>
-        <div class="story-grid">
-          <div class="story-img">
-            <img src="images/necklace_beads.png" alt="Ghanaian handcrafted necklace beads" loading="lazy" />
-          </div>
-          <div class="story-body">
-            <h3>From the heart of Accra to your doorstep</h3>
-            <p>
-              EmyAfroBeads was born from a passion for preserving the ancient art of Ghanaian beadwork.
-              Every bead in our collection tells a story — from the recycled glass bottles carefully crushed
-              and melted in traditional kilns, to the intricate patterns that echo centuries of African heritage.
-            </p>
-            <p>
-              Our artisans in Accra pour their hearts into each piece, blending time-honored techniques
-              with contemporary designs. We believe luxury should be sustainable, meaningful, and accessible
-              to everyone who appreciates authentic craftsmanship.
-            </p>
-            <div class="story-features">
-              <div class="story-feature">
-                <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"></path><path d="M6.38 6.38l2.83 2.83"></path><path d="M3 12h4"></path><path d="M17.62 6.38l-2.83 2.83"></path><path d="M12 18v4"></path><path d="M17.62 17.62l-2.83-2.83"></path><path d="M21 12h-4"></path><path d="M6.38 17.62l2.83-2.83"></path></svg>
-                </div>
-                <div>
-                  <strong>Recycled Materials</strong>
-                  <p>Made from recycled glass</p>
-                </div>
-              </div>
-              <div class="story-feature">
-                <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-4.35-9-8c-1.5-1.95-1-4 1-5.5C6 5 8.5 5 12 9c3.5-4 6-4 8-1.5 2 1.5 2.5 3.55 1 5.5-2.5 3.65-9 8-9 8Z"></path></svg>
-                </div>
-                <div>
-                  <strong>Hand-Strung</strong>
-                  <p>Each bead placed by hand</p>
-                </div>
-              </div>
-              <div class="story-feature">
-                <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a15.3 15.3 0 0 1 0 18" /></svg>
-                </div>
-                <div>
-                  <strong>Fair Trade</strong>
-                  <p>Supporting local artisans</p>
-                </div>
-              </div>
-              <div class="story-feature">
-                <div class="story-feature-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" /><path d="M16 3h-8v4" /></svg>
-                </div>
-                <div>
-                  <strong>Free Shipping</strong>
-                  <p>Worldwide delivery</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="reveal" aria-labelledby="gallery-title">
-      <div class="section-wrap">
-        <div class="section-header-row">
-          <div>
-            <p class="eyebrow">From the studio</p>
-            <h2 id="gallery-title" class="section-title">Styled waist bead looks</h2>
-          </div>
-          <a class="link-muted" href="https://www.instagram.com/adyscreation/" target="_blank" rel="noopener">View on Instagram</a>
-        </div>
-        <div class="gallery-grid">
-          <a href="#gallery" rel="noopener"><img src="images/ig1.jpg" alt="Styled waist beads look" loading="lazy" /></a>
-          <a href="#gallery" rel="noopener"><img src="images/ig2.jpg" alt="Styled waist beads look" loading="lazy" /></a>
-          <a href="#gallery" rel="noopener"><img src="images/ig3.jpg" alt="Styled waist beads look" loading="lazy" /></a>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- TESTIMONIALS -->
-    <section id="reviews" class="reveal" aria-labelledby="reviews-title">
-      <div class="section-wrap">
-        <p class="eyebrow">Customer love</p>
-        <h2 id="reviews-title" class="section-title" style="margin-bottom:2.5rem;">What our clients say</h2>
-        <div class="testimonial-grid">
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">"The quality of these beads is absolutely stunning. I ordered the Sankofa necklace for my wedding and received so many compliments. The craftsmanship is beyond what I expected."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar"><img src="images/waist_beads.png" alt="Adwoa Mensah" /></div>
-              <div class="testimonial-author-info">
-                <p class="name">Adwoa Mensah</p>
-                <p class="location">Accra, Ghana</p>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">"I've bought waist beads from many sellers but EmyAfroBeads are truly special. The colors are rich and vibrant, and they're incredibly comfortable to wear daily. Shipped fast to London too!"</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar"><img src="images/waist_beads.png" alt="Sarah Johnson" /></div>
-              <div class="testimonial-author-info">
-                <p class="name">Sarah Johnson</p>
-                <p class="location">London, UK</p>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">"Ordered custom bracelets for my bridesmaids and they turned out perfect. The communication was excellent and delivery was super fast. Highly recommend!"</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar"><img src="images/waist_beads.png" alt="Nana Ama Owusu" /></div>
-              <div class="testimonial-author-info">
-                <p class="name">Nana Ama Owusu</p>
-                <p class="location">New York, USA</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CUSTOM ORDERS -->
-    <section id="custom" class="reveal">
-      <div class="custom-inner">
-        <div>
-          <p class="eyebrow">Bespoke service</p>
-          <h2>Beads designed for your story</h2>
-          <p>
-            Whether it's for a wedding, festival, naming ceremony, or personal milestone — tell us your colors,
-            sizes, and story. We'll craft a one-of-a-kind set in our Accra atelier and share progress
-            as we string each bead by hand.
-          </p>
-          <div class="custom-actions">
-            <a id="whatsappBtn" class="btn primary" href="https://wa.me/233XXXXXXXXXX?text=Hello%20EmyAfroBeads!%20I'd%20like%20to%20place%20a%20custom%20order." target="_blank" rel="noopener">
-              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.126 1.527 5.86L.06 23.708l5.99-1.572A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.977 0-3.908-.531-5.588-1.535l-.401-.237-3.554.934.949-3.472-.26-.413A9.795 9.795 0 012.18 12c0-5.413 4.407-9.82 9.82-9.82S21.82 6.587 21.82 12s-4.407 9.82-9.82 9.82z"/></svg>
-              Order via WhatsApp
-            </a>
-            <a class="btn ghost" href="mailto:hello@emyafrobeads.com">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline points="3 7 12 13 21 7"></polyline></svg>
-              Email us
-            </a>
-          </div>
-        </div>
-        <div class="custom-stats">
-          <div class="custom-stat">
-            <p class="metric">3–5 days</p>
-            <p class="metric-label">Delivery time</p>
-          </div>
-          <div class="custom-stat">
-            <p class="metric">30+</p>
-            <p class="metric-label">Color stories</p>
-          </div>
-          <div class="custom-stat">
-            <p class="metric">100%</p>
-            <p class="metric-label">Handcrafted</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEWSLETTER -->
-    <section class="reveal">
-      <div class="newsletter-inner">
-        <p class="eyebrow">Stay connected</p>
-        <h2>Join the EmyAfroBeads family</h2>
-        <p>Get early access to new collections, exclusive offers, and behind-the-scenes stories from our Accra atelier.</p>
-        <form id="newsletterForm" class="newsletter-form" novalidate>
-          <input id="newsletterEmail" type="email" placeholder="Enter your email address" required />
-          <button class="btn primary" type="submit">Subscribe</button>
-        </form>
-        <div id="newsletterSuccess" class="newsletter-success" style="display:none;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
-          Welcome to the family! Check your inbox for a surprise.
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer id="contact" class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <span class="brand-name">EmyAfroBeads</span>
-          <p>Handcrafted Ghanaian beads made with love in Accra. Every piece tells a story of heritage, craftsmanship, and beauty.</p>
-          <div class="footer-social">
-            <a href="https://instagram.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><path d="M17.5 6.5h.01"></path></svg>
-            </a>
-            <a href="https://tiktok.com/@emyafrobeads" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13.1a8.28 8.28 0 005.58 2.17V11.8a4.84 4.84 0 01-3.58-1.53V6.69h3.58z"/></svg>
-            </a>
-            <a href="https://facebook.com/emyafrobeads" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-            </a>
-            <a href="https://x.com/emyafrobeads" target="_blank" rel="noopener" aria-label="X (Twitter)">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <a href="#shop">Shop All</a>
-          <a href="#story">Our Story</a>
-          <a href="#reviews">Reviews</a>
-          <a href="#custom">Custom Orders</a>
-        </div>
-        <div class="footer-col">
-          <h4>Customer Care</h4>
-          <a href="mailto:hello@emyafrobeads.com">Contact Us</a>
-          <a href="#">Shipping Info</a>
-          <a href="#">Returns Policy</a>
-          <a href="#">Size Guide</a>
-          <a href="#">FAQs</a>
-        </div>
-        <div class="footer-col">
-          <h4>Get in Touch</h4>
-          <a href="mailto:hello@emyafrobeads.com">hello@emyafrobeads.com</a>
-          <a href="https://wa.me/233XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
-          <a href="#">Accra, Ghana</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 EmyAfroBeads. All rights reserved.</p>
-        <div class="footer-payments">
-          <span class="payment-pill">Paystack</span>
-          <span class="payment-pill">Visa</span>
-          <span class="payment-pill">Mastercard</span>
-          <span class="payment-pill">Mobile Money</span>
-        </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- CART DRAWER -->
-  <div id="cartDrawer" class="cart-drawer" aria-hidden="true">
-    <div class="cart-header">
-      <div class="cart-header-title">
-        <h3>Your Bag</h3>
-      </div>
-      <button id="closeCart" class="icon-button" type="button" aria-label="Close cart">✕</button>
-    </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div id="cartEmpty" class="cart-empty">
-      <div class="cart-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1.5 11h-9L6 8Z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /></svg></div>
-      <p>Your bag is empty</p>
-      <p style="font-size:13px; color:var(--ink-faint); margin-top:4px;">Add some beautiful beads to get started.</p>
-    </div>
-    <div class="cart-summary">
-      <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">GHS 0</span></div>
-      <div class="cart-subtotal"><span>Shipping</span><span>Free</span></div>
-      <div class="cart-total-row"><span>Total</span><span id="cartTotal">GHS 0</span></div>
-      <div class="cart-summary-actions">
-        <button id="checkoutButton" class="btn primary" type="button">Proceed to Checkout</button>
-        <button id="clearCart" class="btn ghost" type="button">Clear Bag</button>
+  <!-- ═══════════════════════════════════
+       REVIEWS SECTION
+  ═══════════════════════════════════ -->
+  <section class="shop" id="reviews" style="padding-top:40px;">
+    <div class="shop__header">
+      <div>
+        <div class="shop__label">Testimonials</div>
+        <h2 class="shop__title">Worn by you</h2>
+        <p style="color:var(--text-muted); line-height:1.6; max-width:600px; margin-top:20px;">
+          "The waist beads are absolutely stunning. The quality is unmatched, and the customer service was incredible. I've already ordered my second set!" — Akua M.
+        </p>
       </div>
     </div>
-  </div>
-  <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
+  </section>
 
-  <!-- QUICK VIEW MODAL -->
-  <div id="quickviewModal" class="quickview-modal" aria-hidden="true">
-    <div class="quickview-overlay" id="quickviewOverlay"></div>
-    <div class="quickview-content">
-      <div class="quickview-image">
-        <img id="quickviewImage" src="" alt="" />
-      </div>
-      <div class="quickview-details">
-        <button id="quickviewClose" class="icon-button quickview-close" type="button" aria-label="Close">✕</button>
-        <p id="quickviewCategory" class="quickview-category"></p>
-        <h3 id="quickviewName"></h3>
-        <div class="quickview-rating">
-          <span class="stars" id="quickviewStars"></span>
-          <span id="quickviewRatingText"></span>
-        </div>
-        <p id="quickviewDescription" class="quickview-description"></p>
-        <p id="quickviewPrice" class="quickview-price"></p>
-        <div class="quickview-options">
-          <label class="quickview-label">
-            <span>Strands</span>
-            <select id="quickviewStrands" class="strand-select">
-              <option value="50">50 strands</option>
-              <option value="75">75 strands</option>
-              <option value="100">100 strands</option>
-              <option value="200">200 strands</option>
-            </select>
-          </label>
-        </div>
-        <div class="quickview-actions">
-          <button id="quickviewAddCart" class="btn primary" type="button">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 01-8 0"></path></svg>
-            Add to Bag
-          </button>
-          <button id="quickviewWishlist" class="btn ghost" type="button">♡ Wishlist</button>
-        </div>
+  <!-- ═══════════════════════════════════
+       CUSTOM & CONTACT SECTION
+  ═══════════════════════════════════ -->
+  <section class="shop" id="custom" style="padding-top:40px;">
+    <div class="shop__header">
+      <div>
+        <div class="shop__label" id="contact">Bespoke Service</div>
+        <h2 class="shop__title">Your vision, our craft</h2>
+        <p style="color:var(--text-muted); line-height:1.6; max-width:600px; margin-top:20px; margin-bottom:20px;">
+          Want something truly one-of-a-kind? Work directly with our artisans to design custom beadwork. Perfect for weddings, cultural ceremonies, or personal expression.
+        </p>
+        <a href="mailto:emyafrobeads@gmail.com" class="btn-primary" style="text-decoration:none;">Start Custom Order</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- CHECKOUT MODAL -->
-  <div id="checkoutModal" class="checkout-modal" aria-hidden="true">
-    <div class="checkout-modal-overlay" id="checkoutOverlay"></div>
-    <div class="checkout-modal-content">
-      <div class="checkout-header">
-        <h3>Checkout</h3>
-        <button id="checkoutClose" class="icon-button" type="button" aria-label="Close">✕</button>
-      </div>
-      <div class="checkout-steps">
-        <div class="checkout-step active" data-step="1">
-          <span class="step-dot">1</span>
-          <span class="step-label">Shipping</span>
-        </div>
-        <div class="checkout-step" data-step="2">
-          <span class="step-dot">2</span>
-          <span class="step-label">Review</span>
-        </div>
-        <div class="checkout-step" data-step="3">
-          <span class="step-dot">3</span>
-          <span class="step-label">Payment</span>
-        </div>
-      </div>
-      <div id="checkoutStep1" class="checkout-body">
-        <div class="checkout-form-row">
-          <div class="checkout-form-group">
-            <label for="checkoutFirstName">First Name</label>
-            <input id="checkoutFirstName" type="text" placeholder="Ama" required />
-          </div>
-          <div class="checkout-form-group">
-            <label for="checkoutLastName">Last Name</label>
-            <input id="checkoutLastName" type="text" placeholder="Mensah" required />
-          </div>
-        </div>
-        <div class="checkout-form-group">
-          <label for="checkoutEmail">Email</label>
-          <input id="checkoutEmail" type="email" placeholder="you@example.com" required />
-        </div>
-        <div class="checkout-form-group">
-          <label for="checkoutPhone">Phone</label>
-          <input id="checkoutPhone" type="tel" placeholder="+233 XX XXX XXXX" required />
-        </div>
-        <div class="checkout-form-group">
-          <label for="checkoutAddress">Delivery Address</label>
-          <textarea id="checkoutAddress" rows="3" placeholder="Your full delivery address"></textarea>
-        </div>
-        <div class="checkout-form-row">
-          <div class="checkout-form-group">
-            <label for="checkoutCity">City</label>
-            <input id="checkoutCity" type="text" placeholder="Accra" />
-          </div>
-          <div class="checkout-form-group">
-            <label for="checkoutCountry">Country</label>
-            <input id="checkoutCountry" type="text" placeholder="Ghana" />
-          </div>
-        </div>
-        <div class="checkout-actions">
-          <button type="button" class="btn ghost" id="checkoutCancel">Cancel</button>
-          <button type="button" class="btn primary" id="checkoutNext1">Continue to Review</button>
-        </div>
-      </div>
-      <div id="checkoutStep2" class="checkout-body" style="display:none;">
-        <div id="checkoutOrderSummary" class="checkout-order-summary"></div>
-        <div class="checkout-payment-methods">
-          <p class="checkout-payment-heading">Accepted payment methods</p>
-          <div class="payment-methods-grid">
-            <div class="payment-card"><span class="payment-logo">P</span><span>Paystack</span></div>
-            <div class="payment-card"><span class="payment-logo">V</span><span>Visa</span></div>
-            <div class="payment-card"><span class="payment-logo">M</span><span>Mastercard</span></div>
-            <div class="payment-card"><span class="payment-logo">MM</span><span>Mobile Money</span></div>
-          </div>
-        </div>
-        <div class="checkout-actions">
-          <button type="button" class="btn ghost" id="checkoutBack2">Back</button>
-          <button type="button" class="btn primary" id="checkoutNext2">Proceed to Payment</button>
-        </div>
-      </div>
-      <div id="checkoutStep3" class="checkout-body" style="display:none;">
-        <div class="checkout-success">
-          <div class="checkout-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></div>
-          <h3>Order Confirmed!</h3>
-          <p>Thank you for shopping with EmyAfroBeads. We'll send you a confirmation email with tracking details shortly.</p>
-          <button type="button" class="btn primary" id="checkoutDone">Continue Shopping</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- AUTH MODAL -->
-  <div id="authModal" class="auth-modal" aria-hidden="true">
-    <div class="auth-modal-overlay" id="authOverlay"></div>
-    <div class="auth-modal-content">
-      <div class="auth-header">
+  <!-- ═══════════════════════════════════
+       MODALS & TOASTS
+  ═══════════════════════════════════ -->
+  <!-- Auth Modal -->
+  <div class="modal" id="authModal">
+    <div class="modal-overlay" id="authOverlay"></div>
+    <div class="modal-panel">
+      <div class="modal-header">
         <h3 id="authTitle">Sign In</h3>
-        <button id="authClose" class="icon-button" type="button" aria-label="Close authentication">✕</button>
+        <button class="modal-close" id="authClose">✕</button>
       </div>
       <div class="auth-tabs">
-        <button id="tabLogin" class="auth-tab active" type="button">Sign In</button>
-        <button id="tabRegister" class="auth-tab" type="button">Create Account</button>
+        <button class="auth-tab active" id="tabLogin">Sign In</button>
+        <button class="auth-tab" id="tabRegister">Create Account</button>
       </div>
-      <form id="loginForm" novalidate>
-        <div class="auth-form-group">
-          <label for="loginEmail">Email Address</label>
-          <input id="loginEmail" type="email" placeholder="you@example.com" required />
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" required />
         </div>
-        <div class="auth-form-group">
-          <label for="loginPassword">Password</label>
-          <input id="loginPassword" type="password" placeholder="••••••••" required />
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" required />
         </div>
-        <div class="auth-actions">
-          <button type="submit" class="btn primary" id="loginSubmitBtn">Sign In</button>
-        </div>
+        <button type="submit" class="btn-primary" id="loginSubmitBtn" style="width: 100%; margin-top: 10px; justify-content: center;">Sign In</button>
       </form>
-      <form id="registerForm" style="display:none;" novalidate>
-        <div class="auth-form-row">
-          <div class="auth-form-group">
-            <label for="registerFirstName">First Name</label>
-            <input id="registerFirstName" type="text" placeholder="Ama" required />
-          </div>
-          <div class="auth-form-group">
-            <label for="registerLastName">Last Name</label>
-            <input id="registerLastName" type="text" placeholder="Mensah" required />
-          </div>
+      <form id="registerForm" style="display:none;">
+        <div style="display:flex; gap:10px;">
+          <div class="form-group"><label>First Name</label><input type="text" id="registerFirstName" required/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" id="registerLastName" required/></div>
         </div>
-        <div class="auth-form-group">
-          <label for="registerEmail">Email Address</label>
-          <input id="registerEmail" type="email" placeholder="you@example.com" required />
-        </div>
-        <div class="auth-form-group">
-          <label for="registerPhone">Phone Number</label>
-          <input id="registerPhone" type="tel" placeholder="+233 XX XXX XXXX" />
-        </div>
-        <div class="auth-form-group">
-          <label for="registerPassword">Password</label>
-          <input id="registerPassword" type="password" placeholder="Min. 6 characters" required />
-        </div>
-        <div class="auth-actions">
-          <button type="submit" class="btn primary" id="registerSubmitBtn">Create Account</button>
-        </div>
+        <div class="form-group"><label>Email</label><input type="email" id="registerEmail" required/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="registerPhone"/></div>
+        <div class="form-group"><label>Password</label><input type="password" id="registerPassword" required/></div>
+        <button type="submit" class="btn-primary" id="registerSubmitBtn" style="width: 100%; margin-top: 10px; justify-content: center;">Create Account</button>
       </form>
     </div>
   </div>
 
-  <!-- TOAST CONTAINER -->
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <h3>Your Bag</h3>
+      <button class="modal-close" id="closeCart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div id="cartEmpty" style="padding: 40px; text-align: center; color: var(--text-muted);">Your bag is empty</div>
+    <div class="cart-summary">
+      <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>Subtotal</span><span id="cartSubtotal">₵0</span></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-weight:600; font-size:1.1rem;"><span>Total</span><span id="cartTotal">₵0</span></div>
+      <button class="btn-primary" id="checkoutButton" style="width:100%; justify-content:center;">Checkout</button>
+    </div>
+  </aside>
+
+  <!-- Checkout Modal -->
+  <div class="modal" id="checkoutModal">
+    <div class="modal-overlay" id="checkoutOverlay"></div>
+    <div class="modal-panel" style="max-width:500px;">
+      <div class="modal-header">
+        <h3>Checkout</h3>
+        <button class="modal-close" id="checkoutClose">✕</button>
+      </div>
+      <div class="checkout-steps" style="display:flex; gap:10px; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:20px;">
+        <span class="checkout-step" data-step="1">1. Shipping</span>
+        <span class="checkout-step" data-step="2">2. Review & Pay</span>
+        <span class="checkout-step" data-step="3">3. Done</span>
+      </div>
+      
+      <div id="checkoutStep1">
+        <div style="display:flex; gap:10px;">
+          <div class="form-group"><label>First Name</label><input type="text" id="checkoutFirstName" required/></div>
+          <div class="form-group"><label>Last Name</label><input type="text" id="checkoutLastName" required/></div>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <div class="form-group"><label>Email</label><input type="email" id="checkoutEmail" required/></div>
+          <div class="form-group"><label>Phone</label><input type="tel" id="checkoutPhone"/></div>
+        </div>
+        <div class="form-group"><label>Address</label><input type="text" id="checkoutAddress" required/></div>
+        <div style="display:flex; gap:10px;">
+          <div class="form-group"><label>City</label><input type="text" id="checkoutCity" required/></div>
+          <div class="form-group"><label>Country</label><input type="text" id="checkoutCountry" required/></div>
+        </div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+          <button class="btn-ghost" id="checkoutCancel">Cancel</button>
+          <button class="btn-primary" id="checkoutNext1">Continue to Review</button>
+        </div>
+      </div>
+
+      <div id="checkoutStep2" style="display:none;">
+        <div id="checkoutOrderSummary" style="margin-bottom:20px;"></div>
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+          <button class="btn-ghost" id="checkoutBack2">Back</button>
+          <button class="btn-primary" id="checkoutNext2">Pay Now</button>
+        </div>
+      </div>
+
+      <div id="checkoutStep3" style="display:none; text-align:center; padding:40px 20px;">
+        <h3 style="color:var(--gold-light); margin-bottom:10px;">Order Confirmed!</h3>
+        <p style="color:var(--text-muted); margin-bottom:20px;">Your order has been placed successfully. You will receive an email confirmation shortly.</p>
+        <button class="btn-primary" id="checkoutDone">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quickview Modal -->
+  <div class="modal" id="quickviewModal">
+    <div class="modal-overlay" id="quickviewOverlay"></div>
+    <div class="modal-panel" style="max-width:700px; display:flex; padding:0; gap:0;">
+      <div style="flex:1;"><img id="quickviewImage" src="" style="width:100%; height:100%; object-fit:cover;" /></div>
+      <div style="flex:1; padding:30px; position:relative;">
+        <button class="modal-close" id="quickviewClose" style="position:absolute; top:10px; right:10px;">✕</button>
+        <div id="quickviewCategory" style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;"></div>
+        <h3 id="quickviewName" style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; margin-bottom:10px;"></h3>
+        <div style="margin-bottom:15px; color:var(--gold);"><span id="quickviewStars"></span> <span id="quickviewRatingText" style="color:var(--text-muted); font-size:0.8rem;"></span></div>
+        <p id="quickviewDescription" style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:20px;"></p>
+        <div id="quickviewPrice" style="font-size:1.4rem; color:var(--gold-light); margin-bottom:20px;"></div>
+        
+        <div class="form-group" style="margin-bottom:20px;">
+          <label>Strands</label>
+          <select class="strand-select" id="quickviewStrands">
+            <option value="50">50 strands</option>
+            <option value="100">100 strands</option>
+            <option value="200">200 strands</option>
+            <option value="custom">Custom amount</option>
+          </select>
+          <div id="quickviewCustomStrand" style="display:none; margin-top:10px;">
+            <input type="number" id="quickviewCustomInput" class="strand-custom-input" placeholder="Enter strands" min="1" max="1000" />
+          </div>
+        </div>
+
+        <button class="btn-primary" id="quickviewAddCart" style="width:100%; justify-content:center; margin-bottom:10px;">Add to Bag</button>
+        <button class="btn-ghost" id="quickviewWishlist" style="width:100%; justify-content:center;">♡ Wishlist</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toastContainer" class="toast-container"></div>
+  <button id="backToTop" class="back-to-top">↑</button>
 
-  <!-- BACK TO TOP -->
-  <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"></path></svg>
-  </button>
-
-  <script src="https://js.paystack.co/v2/inline.js" defer></script>
-  <script src="app.js" defer></script>
-
-  <script>
-    // Header scroll
-    const hdr = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
-
-    // Mobile nav
-    const hamburger = document.getElementById('hamburgerBtn');
-    const mobileNav = document.getElementById('mobileNav');
-    const mobileOverlay = document.getElementById('mobileNavOverlay');
-    const mobileClose = document.getElementById('mobileNavClose');
-    const openMobile = () => { mobileNav.classList.add('open'); mobileOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
-    const closeMobile = () => { mobileNav.classList.remove('open'); mobileOverlay.classList.remove('open'); document.body.style.overflow = ''; };
-    hamburger?.addEventListener('click', openMobile);
-    mobileClose?.addEventListener('click', closeMobile);
-    mobileOverlay?.addEventListener('click', closeMobile);
-    mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
-
-    // Reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
-    }, { threshold: 0.08 });
-    revealEls.forEach(el => revealObs.observe(el));
-
-    // Back to top
-    const btt = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => { btt?.classList.toggle('visible', window.scrollY > 400); }, { passive: true });
-    btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  </script>
+  <script src="https://js.paystack.co/v2/inline.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

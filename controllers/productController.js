@@ -288,19 +288,26 @@ const seedProducts = async (req, res) => {
       },
     ];
 
+    const unsplashImages = [
+      "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80",
+      "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600&q=80",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80"
+    ];
+
     const imageMap = {
-      "African glass bracelet set": "images/waist_beads.png",
-      "Adwoa bracelet": "images/waist_beads.png",
-      "Sankofa necklace": "images/waist_beads.png",
-      "Heritage necklace": "images/waist_beads.png",
-      "Sunrise waist beads": "images/waist_beads.png",
-      "Mocha waist beads": "images/waist_beads.png",
-      "Dusk waist beads": "images/waist_beads.png",
-      "Palm grove bracelet trio": "images/waist_beads.png",
-      "Festival anklet": "images/waist_beads.png",
-      "Cocoa anklet pair": "images/waist_beads.png",
-      "Heritage anklet": "images/waist_beads.png",
-      "Oba necklace": "images/waist_beads.png"
+      "African glass bracelet set": unsplashImages[0],
+      "Adwoa bracelet": unsplashImages[1],
+      "Sankofa necklace": unsplashImages[2],
+      "Heritage necklace": unsplashImages[3],
+      "Sunrise waist beads": unsplashImages[0],
+      "Mocha waist beads": unsplashImages[1],
+      "Dusk waist beads": unsplashImages[2],
+      "Palm grove bracelet trio": unsplashImages[3],
+      "Festival anklet": unsplashImages[0],
+      "Cocoa anklet pair": unsplashImages[1],
+      "Heritage anklet": unsplashImages[2],
+      "Oba necklace": unsplashImages[3]
     };
 
     const count = await Product.countDocuments();
